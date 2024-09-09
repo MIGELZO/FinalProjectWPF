@@ -6,18 +6,47 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Accets\GameCenterIcon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Accets\planet-earth_921490.png" />
+    <None Remove=".gitattributes" />
+    <None Remove=".gitignore" />
+    <None Remove="Accets\3177440.png" />
+    <None Remove="Accets\csharp.png" />
+    <None Remove="Accets\dotnet.png" />
+    <None Remove="Accets\snake.png" />
+    <None Remove="Accets\tictactoe.png" />
+    <None Remove="Accets\wpf.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Projects\" />
+    <Content Include="Accets\GameCenterIcon.ico" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Accets\planet-earth_921490.png" />
+    <Resource Include="Accets\wpf.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Projects\CatchTheEgg\Accets\" />
+    <Folder Include="Projects\CatchTheEgg\Models\" />
+    <Folder Include="Projects\NewFolder1\Accets\" />
+    <Folder Include="Projects\NewFolder1\Models\" />
+    <Folder Include="Projects\NewFolder2\Accets\" />
+    <Folder Include="Projects\NewFolder2\Models\" />
+    <Folder Include="Projects\NewFolder3\Accets\" />
+    <Folder Include="Projects\NewFolder3\Models\" />
+    <Folder Include="Projects\Snake\Accets\" />
+    <Folder Include="Projects\Snake\Models\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Accets\3177440.png" />
+    <Resource Include="Accets\csharp.png" />
+    <Resource Include="Accets\dotnet.png" />
+    <Resource Include="Accets\snake.png" />
+    <Resource Include="Accets\tictactoe.png" />
   </ItemGroup>
 
 </Project>
