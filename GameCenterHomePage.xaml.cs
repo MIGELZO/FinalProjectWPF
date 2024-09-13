@@ -147,7 +147,7 @@ namespace FinalProjectWPF
             }
             return false;
         }
-        // modified
+        //  modified
         private void UserViewbox_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (UserOptions.Visibility == Visibility.Visible)
