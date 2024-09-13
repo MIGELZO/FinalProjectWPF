@@ -13,9 +13,13 @@
     <None Remove=".gitattributes" />
     <None Remove=".gitignore" />
     <None Remove="Accets\3177440.png" />
+    <None Remove="Accets\addIcon.png" />
     <None Remove="Accets\csharp.png" />
     <None Remove="Accets\dotnet.png" />
+    <None Remove="Accets\editIcon.png" />
+    <None Remove="Accets\saveIcon.png" />
     <None Remove="Accets\snake.png" />
+    <None Remove="Accets\switchIcon.png" />
     <None Remove="Accets\tictactoe.png" />
     <None Remove="Accets\wpf.png" />
   </ItemGroup>
@@ -25,6 +29,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Accets\addIcon.png" />
+    <Resource Include="Accets\editIcon.png" />
+    <Resource Include="Accets\saveIcon.png" />
+    <Resource Include="Accets\switchIcon.png" />
     <Resource Include="Accets\wpf.png" />
   </ItemGroup>
 

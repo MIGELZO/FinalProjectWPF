@@ -36,22 +36,30 @@ namespace FinalProjectWPF.FileManagment
             List<User>? users = GetAllUsers() ?? new List<User>();
             int id = users.Count > 0 ? users.Max(u => u.UserId) + 1 : 1;
             User player = new User(name, id);
+            player.IsLogin = true;
+            player.LastLogin = DateTime.Now;
             users.Add(player);
             File.WriteAllText(usersFilePath, JsonSerializer.Serialize(users));
             return player;
         }
 
-
-        public void UpdateUser(int userId, string name)
+        // modified
+        public User UpdateUser(int userId, string name)
         {
             List<User> users = GetAllUsers() ?? new List<User>();
             User? user = users.FirstOrDefault(u => u.UserId == userId);
-            if (user != null)
+            if (name != "")
             {
-                user.FullName = name;
-                user.LastLogin = DateTime.Now;
-                File.WriteAllText(usersFilePath, JsonSerializer.Serialize(users));
+                if (user != null)
+                {
+                    user.FullName = name;
+                    user.LastLogin = DateTime.Now;
+                    File.WriteAllText(usersFilePath, JsonSerializer.Serialize(users));
+                }
+                return user;
             }
+            return user;
+
         }
 
 
@@ -60,13 +68,24 @@ namespace FinalProjectWPF.FileManagment
             List<User> users = GetAllUsers() ?? new List<User>();
             return users.OrderByDescending(u => u.LastLogin).First();
         }
-
-        public void UpdateLoginUser(int userId)
+        // modified
+        public User LoginUser(int userId)
         {
             List<User> users = GetAllUsers() ?? new List<User>();
-            users.Where(u => u.UserId == userId).First().LastLogin = DateTime.Now;
+            User CurrentUser = users.Where(u => u.UserId == userId).First();
+            CurrentUser.LastLogin = DateTime.Now;
+            CurrentUser.IsLogin = true;
+            int index = users.FindIndex(u => u.UserId == userId);
+            users[index] = CurrentUser;
+            File.WriteAllText(usersFilePath, JsonSerializer.Serialize(users));
+            return CurrentUser;
         }
 
+        public void LogoutUser(int userId)
+        {
+            List<User> users = GetAllUsers() ?? new List<User>();
+            users.Where(u => u.UserId == userId).First().IsLogin = false;
+        }
 
         public List<double> GetUserHighScoresForGame(int userID, GameType game)
         {

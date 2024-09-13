@@ -1,5 +1,4 @@
-﻿using System.Configuration;
-using System.Data;
+﻿using FinalProjectWPF.FileManagment;
 using System.Windows;
 
 namespace FinalProjectWPF
@@ -9,6 +8,8 @@ namespace FinalProjectWPF
     /// </summary>
     public partial class App : Application
     {
+        public int LoggedInUserID { get; set; }
+        public dynamic fmGlobal = new FileManager();
     }
 
 }

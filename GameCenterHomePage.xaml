@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:FinalProjectWPF"
       mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="GameCenterHomePage">
+      Title="GameCenterHomePage"
+      MouseLeftButtonDown="UserViewbox_MouseLeftButtonUp">
 
     <Grid x:Name="AppGrid" Style="{StaticResource AppGrid}">
         <Grid.ColumnDefinitions>
@@ -39,17 +40,32 @@
                 <TextBlock x:Name="ClockDate" Text="" FontSize="20" Foreground="#FFB5B36A" FontFamily="Segoe UI Black" Width="118" />
             </StackPanel>
         </Viewbox>
-        <Viewbox VerticalAlignment="Center" Grid.Column="0" Grid.Row="0">
-            <WrapPanel HorizontalAlignment="Left" Width="350">
-                <Image Cursor="Hand" Source="/Accets/3177440.png" Height="99" Width="64" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" MouseLeftButtonUp="Image_MouseLeftButtonUp" />
-                <Label x:Name="UserName" Content="{Binding FullName}" Style="{StaticResource TitleLabelStyle}"/>
+
+        <Viewbox x:Name="UserPanel" VerticalAlignment="Top" Grid.Column="0" Margin="11,9,84,0" Grid.RowSpan="2">
+            <WrapPanel x:Name="TestColor" HorizontalAlignment="Left" Width="350">
+                <Image Cursor="Hand" ToolTip="{Binding FullName}" Source="/Accets/3177440.png" Height="99" Width="64" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" MouseLeftButtonUp="Image_MouseLeftButtonUp" />
+                <TextBox x:Name="EditUserInput" Visibility="Hidden" Width="0" Margin="0" FontSize="20"/>
+                <Image x:Name="SaveNewName" Visibility="Hidden" Cursor="Hand" ToolTip="Save" Source="/Accets/saveIcon.png" Height="0" Width="0" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" MouseLeftButtonUp="EditUserName" />
+                <Label x:Name="UserName" Content="{Binding FullName}" Style="{StaticResource TitleLabelStyle}" Margin="0,15,0,0"/>
+                <!--<Label x:Name="Subtitle" Content="" Visibility="Hidden" Width="0" Height="0" Style="{StaticResource TitleLabelStyle}" Margin="0,15,0,0"/>-->
+
+                    <Viewbox x:Name="UserOptions" VerticalAlignment="Center" Grid.Column="0" Grid.Row="1" Visibility="Hidden">
+                    <WrapPanel HorizontalAlignment="Left" Width="350">
+                        <Image x:Name="EditUserButton" Cursor="Hand" ToolTip="Edit User Name" Source="/Accets/editIcon.png" Margin="10,0,0,0" Height="80" Width="50" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" MouseLeftButtonUp="EditName_MouseLeftButtonUp"/>
+                        <Image x:Name="SwitchUserButton" Cursor="Hand" ToolTip="Switch User" Source="/Accets/switchIcon.png" Margin="10,0,0,0" Height="80" Width="50" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" MouseLeftButtonUp="SwitchUser_MouseLeftButtonUp"/>
+                        <Image x:Name="AddUserButton" Cursor="Hand" ToolTip="Add User" Source="/Accets/addIcon.png" Margin="10,0,0,0" Height="80" Width="50" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" MouseLeftButtonUp="NewUserPanel_MouseLeftButtonUp"/>
+                        <ComboBox x:Name="SelectionList" Width="0" Height="0" Visibility="Hidden" SelectionChanged="SelectedUser"/>
+                        <TextBox x:Name="NewUserInput" Visibility="Hidden" Width="0" Margin="0" FontSize="20"/>
+                        <Image x:Name="CreateUserButton" Cursor="Hand" Visibility="Hidden" ToolTip="Create User" Source="/Accets/addIcon.png" Margin="10,0,0,0" Height="0" Width="0" MouseEnter="Image_MouseEnter" MouseLeave="Image_MouseLeave" MouseLeftButtonUp="CreatUser_MouseLeftButtonUp"/>
+                    </WrapPanel>
+                </Viewbox>
             </WrapPanel>
         </Viewbox>
 
         <Viewbox Grid.Row="2" Grid.Column="1">
             <WrapPanel Width="700" Height="500">
                 <Border CornerRadius="50" Background="{StaticResource IconsBackground}" BorderThickness="20" Height="220" Width="220" Margin="1 0" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" MouseLeftButtonUp="SnakeApp_Click">
-                    <Image Cursor="Hand"  ToolTip="Calculator" Source="\Accets\snake.png" Style="{StaticResource GamesIcons}"  Height="150"/>
+                    <Image Cursor="Hand"  ToolTip="Snake" Source="\Accets\snake.png" Style="{StaticResource GamesIcons}"  Height="150"/>
                 </Border>
                 <Border CornerRadius="50" Background="{StaticResource IconsBackground}" BorderThickness="20" Height="220" Width="220" Margin="1 0" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave">
                     <Image Cursor="Hand"  ToolTip="Calculator" Source="\Accets\snake.png" Style="{StaticResource GamesIcons}"  Height="150"/>

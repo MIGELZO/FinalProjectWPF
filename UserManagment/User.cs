@@ -8,6 +8,7 @@ namespace FinalProjectWPF.UserManagment
         private string _fullName;
         private int _userId;
         private DateTime _lastLogin;
+        private bool _isLogin;
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public string FullName
@@ -45,11 +46,24 @@ namespace FinalProjectWPF.UserManagment
             }
         }
 
+        public bool IsLogin
+        {
+            get
+            {
+                return _isLogin;
+            }
+            set
+            {
+                _isLogin = value;
+            }
+        }
+
         public User(string fullName, int userId)
         {
             FullName = fullName;
             UserId = userId;
             LastLogin = DateTime.Now;
+            IsLogin = true;
         }
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
