@@ -67,7 +67,7 @@
                 <Border CornerRadius="50" Background="{StaticResource IconsBackground}" BorderThickness="20" Height="220" Width="220" Margin="1 0" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" MouseLeftButtonUp="SnakeApp_Click">
                     <Image Cursor="Hand"  ToolTip="Snake" Source="\Accets\snake.png" Style="{StaticResource GamesIcons}"  Height="150"/>
                 </Border>
-                <Border CornerRadius="50" Background="{StaticResource IconsBackground}" BorderThickness="20" Height="220" Width="220" Margin="1 0" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave">
+                <Border CornerRadius="50" Background="{StaticResource IconsBackground}" BorderThickness="20" Height="220" Width="220" Margin="1 0" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" MouseLeftButtonUp="CatchTheEggApp_Click">
                     <Image Cursor="Hand"  ToolTip="Calculator" Source="\Accets\snake.png" Style="{StaticResource GamesIcons}"  Height="150"/>
                 </Border>
                 <Border CornerRadius="50" Background="#FF7C7373" BorderThickness="20" Height="220" Width="220" Margin="1 0" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave">

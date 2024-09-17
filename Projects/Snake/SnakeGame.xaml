@@ -6,9 +6,38 @@
       xmlns:local="clr-namespace:FinalProjectWPF.Projects.Snake"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="SnakeGame">
+      Title="SnakeGame"
+      Focusable="False">
 
-    <WrapPanel Background="#fff">
-        <Button x:Name="GoBack" Content="Go back" Height="20" Click="GoBack_Click"/>
-    </WrapPanel>
+
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="Accets/background.png"/>
+        </Grid.Background>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <TextBlock Text="Score: " Margin="10"/>
+            <TextBlock x:Name="ScoreText" Text="0" Margin="0,10,10,10"/>
+            <Button x:Name="GoBack" Content="Go back" Height="20" Click="GoBack_Click" Focusable="False"/>
+        </StackPanel>
+
+        <Viewbox Grid.Row="1" Stretch="Uniform" Margin="10">
+            <Grid>
+                <Border BorderBrush="Black" BorderThickness="2">
+                    <UniformGrid x:Name="GameGrid" Width="400" Height="400" Focusable="True"/>
+                </Border>
+                <Border x:Name="GameOverOverlay" Background="#80000000" Visibility="Collapsed">
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <TextBlock Text="Game Over" FontSize="24" Foreground="White" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+                        <Button x:Name="ResetButton" Content="Reset" FontSize="20" Padding="20,10" Click="ResetButton_Click"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Viewbox>
+    </Grid>
 </Page>

@@ -1,4 +1,5 @@
 ﻿using FinalProjectWPF.FileManagment;
+using FinalProjectWPF.Projects.CatchTheEgg;
 using FinalProjectWPF.Projects.Snake;
 using FinalProjectWPF.UserManagment;
 using System.ComponentModel;
@@ -59,7 +60,7 @@ namespace FinalProjectWPF
             (sender as Image)!.Opacity = 1;
         }
 
-        // modified
+
         private void Image_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (UserOptions.Visibility == Visibility.Visible)
@@ -84,7 +85,7 @@ namespace FinalProjectWPF
             (sender as Border).BorderBrush = Brushes.Transparent;
         }
 
-        // modified
+
         private void CloseMenu()
         {
             //Subtitle.Visibility = Visibility.Hidden;
@@ -111,7 +112,7 @@ namespace FinalProjectWPF
             CreateUserButton.Width = 0;
             CreateUserButton.Height = 0;
         }
-        // modified
+
         private void OpenMenu()
         {
             UserOptions.Visibility = Visibility.Visible;
@@ -126,7 +127,7 @@ namespace FinalProjectWPF
             SelectionList.Width = 120;
             SelectionList.Height = 20;
         }
-        // modified
+
         private bool IsClickInUserPanelArea(Point clickPosition)
         {
             HitTestResult hitResult = VisualTreeHelper.HitTest(AppGrid, clickPosition);
@@ -147,7 +148,7 @@ namespace FinalProjectWPF
             }
             return false;
         }
-        //  modified
+
         private void UserViewbox_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             if (UserOptions.Visibility == Visibility.Visible)
@@ -157,12 +158,10 @@ namespace FinalProjectWPF
                 if (IsClickInUserPanelArea(clickPosition))
                 {
                     return;
-                    //TestColor.Background = Brushes.Red;
                 }
                 else
                 {
                     CloseMenu();
-                    //TestColor.Background = Brushes.Transparent;
                 }
             }
             else return;
@@ -172,7 +171,11 @@ namespace FinalProjectWPF
         {
             NavigationService.Navigate(new SnakePreviewPage());
         }
-        // modified
+        private void CatchTheEggApp_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new CatchTheEggPreviewPage());
+        }
+
         private void SwitchUser_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             EditUserButton.Visibility = Visibility.Hidden;
@@ -205,7 +208,7 @@ namespace FinalProjectWPF
             }
 
         }
-        // modified
+
         private void SelectedUser(object sender, SelectionChangedEventArgs e)
         {
             EditUserButton.Visibility = Visibility.Visible;
@@ -222,7 +225,7 @@ namespace FinalProjectWPF
             fm.LoginUser(CurrentUser.UserId);
             CloseMenu();
         }
-        // modified
+
         private void NewUserPanel_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             EditUserButton.Visibility = Visibility.Hidden;
@@ -242,7 +245,7 @@ namespace FinalProjectWPF
             CreateUserButton.Width = 50;
             CreateUserButton.Height = 70;
         }
-        // modified
+
         private void CreatUser_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             User CurrentUser = fm.CheckLastLoginUser();
@@ -252,7 +255,7 @@ namespace FinalProjectWPF
             CloseMenu();
         }
 
-        // modified
+
         private User CreateNewUser(string name)
         {
             if (name != "")
@@ -271,7 +274,7 @@ namespace FinalProjectWPF
             User CurrentUser = fm.CheckLastLoginUser();
             return CurrentUser;
         }
-        // modified
+
         private void EditName_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             EditUserButton.Visibility = Visibility.Hidden;
@@ -287,7 +290,6 @@ namespace FinalProjectWPF
             SaveNewName.Width = 40;
             SaveNewName.Height = 70;
         }
-        // modified
         private void EditUserName(object sender, MouseButtonEventArgs e)
         {
             User CurrentUser = fm.CheckLastLoginUser();
