@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:FinalProjectWPF"
         mc:Ignorable="d"
         Title="Daniel's App Center" Height="450" Width="800"
-        WindowState="Maximized"
-        ResizeMode="NoResize">
+        WindowState="Maximized">
+    <!--ResizeMode="NoResize"-->
 
     <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
 

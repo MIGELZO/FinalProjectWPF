@@ -17,7 +17,7 @@
             <Label Name="ScoreText" FontSize="20" Canvas.Left="25" Canvas.Top="20">Score: 0</Label>
             <Label Name="Hearts" FontSize="20" Canvas.Left="537" Canvas.Top="20" HorizontalAlignment="Left" VerticalAlignment="Center">Hearts: 5</Label>
 
-            <Rectangle Name="Basket" Width="80" Height="80" Fill="Orange" Canvas.Left="295" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Rectangle Name="Basket" Width="{Binding Size}" Height="80" Fill="Orange" Canvas.Left="295" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         </Canvas>
     </Grid>
 </Page>

@@ -10,11 +10,12 @@ namespace FinalProjectWPF.Projects.CatchTheEgg.Models
         public int GeneralSpeed { get; set; }
         public int Score { get; set; }
         public double Hearts { get; set; }
-        public Basket PlayerBasket { get; set; }
+        public Basket PlayerBasket;
         private List<Egg> Eggs = new List<Egg>();
         private int EggRate = 0;
         private int SpecialEggRate = 0;
-        private int SkillRate = 0;
+        //modified
+        private bool DoubleSkill = false;
         private Random rand = new Random();
         private Canvas MyCanvas;
         private List<Rectangle> itemsToRemove = new List<Rectangle>();
@@ -45,7 +46,7 @@ namespace FinalProjectWPF.Projects.CatchTheEgg.Models
                 }
                 if (Canvas.GetTop(egg.ItemShape) > windowEndPoint && !(egg.IsMissed))
                 {
-
+                    // או להפריד את הסל המיוחד לקלאס שונה או למצוא שאילתה שתוציא אותו מהדופן כי הוא נשבר כמו ביצה
                     if (egg is not Poop && egg is not Heart)
                     {
                         egg.IsMissed = true;
@@ -94,13 +95,14 @@ namespace FinalProjectWPF.Projects.CatchTheEgg.Models
                 }
                 else if (SpecialEggRate != 15)
                 {
-                    MakeItem(1);
+                    MakeItem(4);
 
                     SpecialEggRate++;
                 }
                 else
                 {
                     MakeItem(rand.Next(2, 7));
+                    //MakeItem(5); //here
                     SpecialEggRate = 0;
                 }
             }
@@ -129,7 +131,7 @@ namespace FinalProjectWPF.Projects.CatchTheEgg.Models
                     newItem = new SpecialEgg(rand.Next(50, windowEndPoint), "../../../Projects/CatchTheEgg/Accets/Basket.png", "GrowBasket");
                     break;
                 case 5:
-                    newItem = new SpecialEgg(rand.Next(50, windowEndPoint), "../../../Projects/CatchTheEgg/Accets/GoldenEgg.png", "somthing");
+                    newItem = new SpecialEgg(rand.Next(50, windowEndPoint), "../../../Projects/CatchTheEgg/Accets/GoldenEgg.png", "GoldenEgg");
                     break;
                 case 6:
                     newItem = new Heart(rand.Next(50, windowEndPoint), "../../../Projects/CatchTheEgg/Accets/Heart.png");
@@ -141,6 +143,11 @@ namespace FinalProjectWPF.Projects.CatchTheEgg.Models
 
             if (newItem != null)
             {
+                if (newItem.ItemShape.Name == "special")
+                {
+                    newItem.ItemShape.Width = 60;
+                    newItem.ItemShape.Height = 70;
+                }
                 Canvas.SetLeft(newItem.ItemShape, newItem.Position);
                 Canvas.SetTop(newItem.ItemShape, 0);
                 MyCanvas.Children.Add(newItem.ItemShape);
@@ -153,6 +160,7 @@ namespace FinalProjectWPF.Projects.CatchTheEgg.Models
             await Task.Delay(600);
             itemsToRemove.Add(egg.ItemShape);
         }
+
         // modified
         private void EggCatched(Egg egg)
         {
@@ -161,7 +169,7 @@ namespace FinalProjectWPF.Projects.CatchTheEgg.Models
             int basketPositionPoint = (int)basketPosition;
 
             Rect eggRect = new Rect(Canvas.GetLeft(egg.ItemShape), Canvas.GetTop(egg.ItemShape), egg.ItemShape.Width, egg.ItemShape.Height);
-            Rect basketRect = new Rect(PlayerBasket.Position, basketPositionPoint, PlayerBasket.Size, 80);
+            Rect basketRect = new Rect(PlayerBasket.Position, basketPositionPoint, PlayerBasket.Size, PlayerBasket.Size);
 
             if (basketRect.IntersectsWith(eggRect))
             {
@@ -169,7 +177,6 @@ namespace FinalProjectWPF.Projects.CatchTheEgg.Models
                 if (egg is SpecialEgg specialEgg)
                 {
                     ApplySpecialSkill(specialEgg.Skill);
-                    SkillRate = 7;
                 }
                 if (egg is Poop)
                 {
@@ -193,7 +200,9 @@ namespace FinalProjectWPF.Projects.CatchTheEgg.Models
                 }
                 else
                 {
-                    Score++;
+                    if (!DoubleSkill) { Score++; }
+                    else { Score += 2; }
+
                     if (Score <= 100)
                     {
                         IncreaseGameLevel();
@@ -202,18 +211,34 @@ namespace FinalProjectWPF.Projects.CatchTheEgg.Models
             }
         }
 
-        private void ApplySpecialSkill(string skill)
+        //modified
+        private async void ApplySpecialSkill(string skill)
         {
             switch (skill)
             {
                 case "freeze":
-
+                    // תנאי למנוע הקפאה כפולה
+                    GeneralSpeed /= 2;
+                    await Task.Delay(10000);
+                    GeneralSpeed *= 2;
                     break;
+
                 case "MultiplePoints":
-
+                    // תנאי לאפשר X4 וכן הלאה
+                    DoubleSkill = true;
+                    await Task.Delay(10000);
+                    DoubleSkill = false;
                     break;
+
                 case "GrowBasket":
-                    PlayerBasket.Size += 20;
+                    // תנאו למנוע הגדלה כפולה
+                    PlayerBasket.Size *= 2;
+                    await Task.Delay(10000);
+                    PlayerBasket.Size /= 2;
+                    break;
+
+                case "GoldenEgg":
+                    Score += 10;
                     break;
             }
         }
@@ -231,13 +256,14 @@ namespace FinalProjectWPF.Projects.CatchTheEgg.Models
         {
             return Hearts <= 0;
         }
-
+        // modified
         public void ResetGameValues()
         {
             Score = 0;
             Hearts = 5;
             EggRate = 0;
             SpecialEggRate = 0;
+            GeneralSpeed = 10;
             foreach (var egg in Eggs)
             {
                 MyCanvas.Children.Remove(egg.ItemShape);

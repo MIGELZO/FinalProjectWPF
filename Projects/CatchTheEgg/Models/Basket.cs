@@ -1,14 +1,43 @@
-﻿namespace FinalProjectWPF.Projects.CatchTheEgg.Models
+﻿using System.ComponentModel;
+
+namespace FinalProjectWPF.Projects.CatchTheEgg.Models
 {
-    internal class Basket
+    internal class Basket : INotifyPropertyChanged
     {
-        public double Position { get; set; }
-        public double Size { get; set; }
+        private double _size;
+
+        private double _position;
+
+        public double Position
+        {
+            get => _position;
+            set
+            {
+                _position = value;
+                OnPropertyChanged(nameof(Position));
+            }
+        }
+        public double Size
+        {
+            get => _size;
+            set
+            {
+                _size = value;
+                OnPropertyChanged(nameof(Size));
+            }
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+
 
         public Basket(double position, double size)
         {
             Position = position;
             Size = size;
+        }
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

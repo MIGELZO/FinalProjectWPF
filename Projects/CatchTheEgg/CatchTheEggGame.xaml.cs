@@ -30,10 +30,11 @@ namespace FinalProjectWPF.Projects.CatchTheEgg
             MyCanvas.Focus();
 
             basket.ImageSource = new BitmapImage(new Uri("../../../Projects/CatchTheEgg/Accets/Basket.png", UriKind.Relative));
+
             Basket.Fill = basket;
             MyCanvas.Background = backgroundImage;
-
             gameManager = new GameManager(MyCanvas, new Basket(Canvas.GetLeft(Basket), Basket.Width), 10);
+            DataContext = gameManager.PlayerBasket;
 
 
             GameTimer.Tick += GameEngine;
@@ -87,6 +88,7 @@ namespace FinalProjectWPF.Projects.CatchTheEgg
             double newWidth = MyCanvas.ActualWidth;
             double newHeight = MyCanvas.ActualHeight;
             gameManager.PlayerBasket.Size = newWidth * 0.1;
+            gameManager.PlayerBasket.Size = newHeight * 0.1;
         }
     }
 }
