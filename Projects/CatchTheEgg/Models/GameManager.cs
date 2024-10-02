@@ -14,7 +14,6 @@ namespace FinalProjectWPF.Projects.CatchTheEgg.Models
         private List<Egg> Eggs = new List<Egg>();
         private int EggRate = 0;
         private int SpecialEggRate = 0;
-        //modified
         private bool DoubleSkill = false;
         private Random rand = new Random();
         private Canvas MyCanvas;
@@ -95,7 +94,7 @@ namespace FinalProjectWPF.Projects.CatchTheEgg.Models
                 }
                 else if (SpecialEggRate != 15)
                 {
-                    MakeItem(4);
+                    MakeItem(1);
 
                     SpecialEggRate++;
                 }
@@ -108,7 +107,7 @@ namespace FinalProjectWPF.Projects.CatchTheEgg.Models
             }
         }
 
-        // modified
+
         private void MakeItem(int i)
         {
             double windowWidth = MyCanvas.ActualWidth;
@@ -161,7 +160,7 @@ namespace FinalProjectWPF.Projects.CatchTheEgg.Models
             itemsToRemove.Add(egg.ItemShape);
         }
 
-        // modified
+
         private void EggCatched(Egg egg)
         {
             double windowHeight = MyCanvas.ActualHeight;
@@ -256,7 +255,7 @@ namespace FinalProjectWPF.Projects.CatchTheEgg.Models
         {
             return Hearts <= 0;
         }
-        // modified
+
         public void ResetGameValues()
         {
             Score = 0;

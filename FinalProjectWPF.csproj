@@ -37,6 +37,32 @@
     <None Remove="Projects\CatchTheEgg\Accets\heartsImg\3.0.png" />
     <None Remove="Projects\CatchTheEgg\Accets\MultiplePointsEgg.png" />
     <None Remove="Projects\CatchTheEgg\Accets\Poop.png" />
+    <None Remove="Projects\MyLittleBusiness\Assets\AddLineIcon.png" />
+    <None Remove="Projects\MyLittleBusiness\Assets\american_express.gif" />
+    <None Remove="Projects\MyLittleBusiness\Assets\APPLEpay.gif" />
+    <None Remove="Projects\MyLittleBusiness\Assets\billing1.png" />
+    <None Remove="Projects\MyLittleBusiness\Assets\CartIcon.png" />
+    <None Remove="Projects\MyLittleBusiness\Assets\CreditCardIcon.png" />
+    <None Remove="Projects\MyLittleBusiness\Assets\CustomerIcon.png" />
+    <None Remove="Projects\MyLittleBusiness\Assets\DeleteIcon.png" />
+    <None Remove="Projects\MyLittleBusiness\Assets\diners.gif" />
+    <None Remove="Projects\MyLittleBusiness\Assets\DownloadIcon.png" />
+    <None Remove="Projects\MyLittleBusiness\Assets\EditIcon.png" />
+    <None Remove="Projects\MyLittleBusiness\Assets\ExitIcon.png" />
+    <None Remove="Projects\MyLittleBusiness\Assets\Gpay_Logo.png" />
+    <None Remove="Projects\MyLittleBusiness\Assets\HomeIcon.png" />
+    <None Remove="Projects\MyLittleBusiness\Assets\Info_icon.svg.png" />
+    <None Remove="Projects\MyLittleBusiness\Assets\InvoiceIcon.png" />
+    <None Remove="Projects\MyLittleBusiness\Assets\isracard.gif" />
+    <None Remove="Projects\MyLittleBusiness\Assets\mastercard.gif" />
+    <None Remove="Projects\MyLittleBusiness\Assets\PCI DSS.png" />
+    <None Remove="Projects\MyLittleBusiness\Assets\pciLogo.png" />
+    <None Remove="Projects\MyLittleBusiness\Assets\PurpleLogoSmall.png" />
+    <None Remove="Projects\MyLittleBusiness\Assets\RefundIcon.png" />
+    <None Remove="Projects\MyLittleBusiness\Assets\SendIcon.png" />
+    <None Remove="Projects\MyLittleBusiness\Assets\SettingsIcon.png" />
+    <None Remove="Projects\MyLittleBusiness\Assets\ShowIcon.png" />
+    <None Remove="Projects\MyLittleBusiness\Assets\visa.gif" />
     <None Remove="Projects\Snake\Accets\apple.png" />
     <None Remove="Projects\Snake\Accets\background.png" />
     <None Remove="Projects\Snake\Accets\body.png" />
@@ -59,12 +85,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Projects\NewFolder1\Accets\" />
-    <Folder Include="Projects\NewFolder1\Models\" />
-    <Folder Include="Projects\NewFolder2\Accets\" />
-    <Folder Include="Projects\NewFolder2\Models\" />
-    <Folder Include="Projects\NewFolder3\Accets\" />
-    <Folder Include="Projects\NewFolder3\Models\" />
+    <Folder Include="Projects\MyCalender\Accets\" />
+    <Folder Include="Projects\DontDropTheMillion\Accets\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -87,6 +109,32 @@
     <Resource Include="Projects\CatchTheEgg\Accets\heartsImg\3.0.png" />
     <Resource Include="Projects\CatchTheEgg\Accets\MultiplePointsEgg.png" />
     <Resource Include="Projects\CatchTheEgg\Accets\Poop.png" />
+    <Resource Include="Projects\MyLittleBusiness\Assets\AddLineIcon.png" />
+    <Resource Include="Projects\MyLittleBusiness\Assets\american_express.gif" />
+    <Resource Include="Projects\MyLittleBusiness\Assets\APPLEpay.gif" />
+    <Resource Include="Projects\MyLittleBusiness\Assets\billing1.png" />
+    <Resource Include="Projects\MyLittleBusiness\Assets\CartIcon.png" />
+    <Resource Include="Projects\MyLittleBusiness\Assets\CreditCardIcon.png" />
+    <Resource Include="Projects\MyLittleBusiness\Assets\CustomerIcon.png" />
+    <Resource Include="Projects\MyLittleBusiness\Assets\DeleteIcon.png" />
+    <Resource Include="Projects\MyLittleBusiness\Assets\diners.gif" />
+    <Resource Include="Projects\MyLittleBusiness\Assets\DownloadIcon.png" />
+    <Resource Include="Projects\MyLittleBusiness\Assets\EditIcon.png" />
+    <Resource Include="Projects\MyLittleBusiness\Assets\ExitIcon.png" />
+    <Resource Include="Projects\MyLittleBusiness\Assets\Gpay_Logo.png" />
+    <Resource Include="Projects\MyLittleBusiness\Assets\HomeIcon.png" />
+    <Resource Include="Projects\MyLittleBusiness\Assets\Info_icon.svg.png" />
+    <Resource Include="Projects\MyLittleBusiness\Assets\InvoiceIcon.png" />
+    <Resource Include="Projects\MyLittleBusiness\Assets\isracard.gif" />
+    <Resource Include="Projects\MyLittleBusiness\Assets\mastercard.gif" />
+    <Resource Include="Projects\MyLittleBusiness\Assets\PCI DSS.png" />
+    <Resource Include="Projects\MyLittleBusiness\Assets\pciLogo.png" />
+    <Resource Include="Projects\MyLittleBusiness\Assets\PurpleLogoSmall.png" />
+    <Resource Include="Projects\MyLittleBusiness\Assets\RefundIcon.png" />
+    <Resource Include="Projects\MyLittleBusiness\Assets\SendIcon.png" />
+    <Resource Include="Projects\MyLittleBusiness\Assets\SettingsIcon.png" />
+    <Resource Include="Projects\MyLittleBusiness\Assets\ShowIcon.png" />
+    <Resource Include="Projects\MyLittleBusiness\Assets\visa.gif" />
     <Resource Include="Projects\Snake\Accets\apple.png" />
     <Resource Include="Projects\Snake\Accets\background.png" />
     <Resource Include="Projects\Snake\Accets\body.png" />

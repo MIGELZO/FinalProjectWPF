@@ -1,5 +1,8 @@
 ﻿using FinalProjectWPF.FileManagment;
 using FinalProjectWPF.Projects.CatchTheEgg;
+using FinalProjectWPF.Projects.DontDropTheMillion;
+using FinalProjectWPF.Projects.MyCalender;
+using FinalProjectWPF.Projects.MyLittleBusiness;
 using FinalProjectWPF.Projects.Snake;
 using FinalProjectWPF.UserManagment;
 using System.ComponentModel;
@@ -297,5 +300,26 @@ namespace FinalProjectWPF
             CloseMenu();
         }
 
+        private void CatchTheEggApp_Click(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.Navigate(new CatchTheEggPreviewPage());
+        }
+
+        private void SnakeApp_Click(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.Navigate(new SnakePreviewPage());
+        }
+        private void CalenderApp_Click(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.Navigate(new CalenderPreviewPage());
+        }
+        private void DontDTMillionApp_Click(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.Navigate(new DontDropTheMillionPreviewPage());
+        }
+        private void LittleBusinessApp_Click(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.Navigate(new MyLittleBusinessPreviewPage());
+        }
     }
 }

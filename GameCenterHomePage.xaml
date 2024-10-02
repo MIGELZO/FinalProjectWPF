@@ -22,7 +22,7 @@
             <RowDefinition Height="0.3*" />
         </Grid.RowDefinitions>
 
-
+        
         <Viewbox VerticalAlignment="Center" Grid.Column="1" Grid.Row="0">
             <WrapPanel >
                 <Label x:Name="TitleLabel" Content="Play Center" Style="{StaticResource TitleLabelStyle}" />
@@ -64,19 +64,19 @@
 
         <Viewbox Grid.Row="2" Grid.Column="1">
             <WrapPanel Width="700" Height="500">
-                <Border CornerRadius="50" Background="{StaticResource IconsBackground}" BorderThickness="20" Height="220" Width="220" Margin="1 0" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" MouseLeftButtonUp="SnakeApp_Click">
+                <Border CornerRadius="50" Background="{StaticResource IconsBackground}" BorderThickness="20" Height="220" Width="220" Margin="1 0" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" MouseLeftButtonUp="SnakeApp_Click" ToolTip="Snake">
                     <Image Cursor="Hand"  ToolTip="Snake" Source="\Accets\snake.png" Style="{StaticResource GamesIcons}"  Height="150"/>
                 </Border>
-                <Border CornerRadius="50" Background="{StaticResource IconsBackground}" BorderThickness="20" Height="220" Width="220" Margin="1 0" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" MouseLeftButtonUp="CatchTheEggApp_Click">
+                <Border CornerRadius="50" Background="{StaticResource IconsBackground}" BorderThickness="20" Height="220" Width="220" Margin="1 0" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" MouseLeftButtonUp="CatchTheEggApp_Click" ToolTip="Eggs">
                     <Image Cursor="Hand"  ToolTip="Calculator" Source="\Accets\snake.png" Style="{StaticResource GamesIcons}"  Height="150"/>
                 </Border>
-                <Border CornerRadius="50" Background="#FF7C7373" BorderThickness="20" Height="220" Width="220" Margin="1 0" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave">
+                <Border CornerRadius="50" Background="{StaticResource IconsBackground}" BorderThickness="20" Height="220" Width="220" Margin="1 0" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" MouseLeftButtonUp="CalenderApp_Click" ToolTip="Calender">
                     <Image Cursor="Hand"  ToolTip="Snake" Source="\Accets\snake.png" Style="{StaticResource GamesIcons}"  Height="150"/>
                 </Border>
-                <Border CornerRadius="50" Background="{StaticResource IconsBackground}" BorderThickness="20" Height="220" Width="220" Margin="1 0" MouseLeave="Border_MouseLeave" MouseEnter="Border_MouseEnter">
+                <Border CornerRadius="50" Background="{StaticResource IconsBackground}" BorderThickness="20" Height="220" Width="220" Margin="1 0" MouseLeave="Border_MouseLeave" MouseEnter="Border_MouseEnter" MouseLeftButtonUp="DontDTMillionApp_Click" ToolTip="MillionDrop">
                     <Image Cursor="Hand"  ToolTip="Tetris" Source="\Accets\snake.png" Style="{StaticResource GamesIcons}" Height="150"/>
                 </Border>
-                <Border CornerRadius="50"  Background="{StaticResource IconsBackground}" BorderThickness="20" Height="220" Width="220" Margin="1 0" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave">
+                <Border CornerRadius="50"  Background="{StaticResource IconsBackground}" BorderThickness="20" Height="220" Width="220" Margin="1 0" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave" MouseLeftButtonUp="LittleBusinessApp_Click" ToolTip="MyLittleBusiness">
                     <Image Cursor="Hand"  ToolTip="Tic Tac Toe" Source="\Accets\snake.png" Style="{StaticResource GamesIcons}"  Height="150"/>
                 </Border>
                 <Border CornerRadius="50"  Background="{StaticResource IconsBackground}" BorderThickness="20" Height="220" Width="220" Margin="1 0" MouseEnter="Border_MouseEnter" MouseLeave="Border_MouseLeave">
