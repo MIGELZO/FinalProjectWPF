@@ -6,22 +6,33 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
-    <ApplicationIcon>Accets\GameCenterIcon.ico</ApplicationIcon>
+    <ApplicationIcon>Assets\GameCenterIcon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove=".gitattributes" />
     <None Remove=".gitignore" />
-    <None Remove="Accets\3177440.png" />
-    <None Remove="Accets\addIcon.png" />
-    <None Remove="Accets\csharp.png" />
-    <None Remove="Accets\dotnet.png" />
-    <None Remove="Accets\editIcon.png" />
-    <None Remove="Accets\saveIcon.png" />
-    <None Remove="Accets\snake.png" />
-    <None Remove="Accets\switchIcon.png" />
-    <None Remove="Accets\tictactoe.png" />
-    <None Remove="Accets\wpf.png" />
+    <None Remove="Assets\3177440.png" />
+    <None Remove="Assets\addIcon.png" />
+    <None Remove="Assets\billing1.png" />
+    <None Remove="Assets\CalenderIcon.png" />
+    <None Remove="Assets\CatchTheEggIcon.png" />
+    <None Remove="Assets\csharp.png" />
+    <None Remove="Assets\dotnet.png" />
+    <None Remove="Assets\DropTheMillionIcon.png" />
+    <None Remove="Assets\editIcon.png" />
+    <None Remove="Assets\GameCenterBackground.mp4" />
+    <None Remove="Assets\LittleBusinessIcon2.png" />
+    <None Remove="Assets\MyLittleBusinessIcon.png" />
+    <None Remove="Assets\PurpleLogoSmall.png" />
+    <None Remove="Assets\saveIcon.png" />
+    <None Remove="Assets\snake.png" />
+    <None Remove="Assets\SnakeIcon.png" />
+    <None Remove="Assets\switchIcon.png" />
+    <None Remove="Assets\TestBackground.wmv" />
+    <None Remove="Assets\tictactoe.png" />
+    <None Remove="Assets\TicTacToeIcon.png" />
+    <None Remove="Assets\wpf.png" />
     <None Remove="Projects\CatchTheEgg\Accets\Background.jpg" />
     <None Remove="Projects\CatchTheEgg\Accets\Basket.png" />
     <None Remove="Projects\CatchTheEgg\Accets\BrokenEgg.png" />
@@ -73,15 +84,27 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Accets\GameCenterIcon.ico" />
+    <CodeAnalysisDictionary Include="Assets\GameCenterIcon.ico" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Accets\addIcon.png" />
-    <Resource Include="Accets\editIcon.png" />
-    <Resource Include="Accets\saveIcon.png" />
-    <Resource Include="Accets\switchIcon.png" />
-    <Resource Include="Accets\wpf.png" />
+    <Content Include="Assets\GameCenterBackground.mp4">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\addIcon.png" />
+    <Resource Include="Assets\CalenderIcon.png" />
+    <Resource Include="Assets\CatchTheEggIcon.png" />
+    <Resource Include="Assets\DropTheMillionIcon.png" />
+    <Resource Include="Assets\editIcon.png" />
+    <Resource Include="Assets\MyLittleBusinessIcon.png" />
+    <Resource Include="Assets\saveIcon.png" />
+    <Resource Include="Assets\SnakeIcon.png" />
+    <Resource Include="Assets\switchIcon.png" />
+    <Resource Include="Assets\TicTacToeIcon.png" />
+    <Resource Include="Assets\wpf.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -90,11 +113,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Accets\3177440.png" />
-    <Resource Include="Accets\csharp.png" />
-    <Resource Include="Accets\dotnet.png" />
-    <Resource Include="Accets\snake.png" />
-    <Resource Include="Accets\tictactoe.png" />
+    <Resource Include="Assets\3177440.png" />
+    <Resource Include="Assets\csharp.png" />
+    <Resource Include="Assets\dotnet.png" />
     <Resource Include="Projects\CatchTheEgg\Accets\Background.jpg" />
     <Resource Include="Projects\CatchTheEgg\Accets\Basket.png" />
     <Resource Include="Projects\CatchTheEgg\Accets\BrokenEgg.png" />

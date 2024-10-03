@@ -44,6 +44,13 @@ namespace FinalProjectWPF
             LiveTime.Start();
         }
 
+        private void BackgroundMedia_MediaEnded(object sender, RoutedEventArgs e)
+        {
+            // Restart the media when it ends
+            GifBackground.Position = TimeSpan.Zero;
+            GifBackground.Play();
+        }
+
         void timer_Tick(object sender, EventArgs e)
         {
             ClockText.Text = DateTime.Now.ToString("HH:mm:ss");
@@ -192,6 +199,7 @@ namespace FinalProjectWPF
             //Subtitle.Height = 30;
             //Subtitle.Content = "Select another user:";
             SelectionList.Visibility = Visibility.Visible;
+            SelectionList.Height = 40;
 
             DateTime date = new DateTime(2024, 1, 1);
 
