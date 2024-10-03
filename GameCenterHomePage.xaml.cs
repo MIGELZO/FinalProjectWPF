@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 
+
 namespace FinalProjectWPF
 {
     public partial class GameCenterHomePage : Page
@@ -46,7 +47,6 @@ namespace FinalProjectWPF
 
         private void BackgroundMedia_MediaEnded(object sender, RoutedEventArgs e)
         {
-            // Restart the media when it ends
             GifBackground.Position = TimeSpan.Zero;
             GifBackground.Play();
         }
