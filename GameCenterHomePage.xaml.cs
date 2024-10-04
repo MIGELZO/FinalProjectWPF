@@ -4,6 +4,7 @@ using FinalProjectWPF.Projects.DontDropTheMillion;
 using FinalProjectWPF.Projects.MyCalender;
 using FinalProjectWPF.Projects.MyLittleBusiness;
 using FinalProjectWPF.Projects.Snake;
+using FinalProjectWPF.Projects.TicTacToe;
 using FinalProjectWPF.UserManagment;
 using System.ComponentModel;
 using System.Windows;
@@ -86,6 +87,7 @@ namespace FinalProjectWPF
         private void Border_MouseEnter(object sender, MouseEventArgs e)
         {
             (sender as Border).BorderBrush = Brushes.AliceBlue;
+            (sender as Border).Opacity = 0.95;
 
 
         }
@@ -93,6 +95,8 @@ namespace FinalProjectWPF
         private void Border_MouseLeave(object sender, MouseEventArgs e)
         {
             (sender as Border).BorderBrush = Brushes.Transparent;
+            (sender as Border).Opacity = 0.65;
+
         }
 
 
@@ -328,6 +332,10 @@ namespace FinalProjectWPF
         private void LittleBusinessApp_Click(object sender, MouseButtonEventArgs e)
         {
             NavigationService.Navigate(new MyLittleBusinessPreviewPage());
+        }
+        private void TicTacToeApp_Click(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.Navigate(new TicTacToePreviewPage());
         }
     }
 }

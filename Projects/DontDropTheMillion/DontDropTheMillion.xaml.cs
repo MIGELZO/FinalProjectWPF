@@ -140,16 +140,16 @@ namespace FinalProjectWPF.Projects.DontDropTheMillion
             switch (CorrectIndex)
             {
                 case 0:
-                    A0Rec.Fill = new SolidColorBrush(Colors.LightGreen); // Set fill to green
+                    Answer0.Foreground = new SolidColorBrush(Colors.LightGreen); // Set fill to green
                     break;
                 case 1:
-                    A1Rec.Fill = new SolidColorBrush(Colors.LightGreen);
+                    Answer1.Foreground = new SolidColorBrush(Colors.LightGreen);
                     break;
                 case 2:
-                    A2Rec.Fill = new SolidColorBrush(Colors.LightGreen);
+                    Answer2.Foreground = new SolidColorBrush(Colors.LightGreen);
                     break;
                 case 3:
-                    A3Rec.Fill = new SolidColorBrush(Colors.LightGreen);
+                    Answer3.Foreground = new SolidColorBrush(Colors.LightGreen);
                     break;
             }
 
@@ -159,16 +159,16 @@ namespace FinalProjectWPF.Projects.DontDropTheMillion
             switch (CorrectIndex)
             {
                 case 0:
-                    A0Rec.Fill = new SolidColorBrush(Colors.Transparent); // Reset to default color
+                    Answer0.Foreground = new SolidColorBrush(Colors.Transparent); // Reset to default color
                     break;
                 case 1:
-                    A1Rec.Fill = new SolidColorBrush(Colors.Transparent);
+                    Answer1.Foreground = new SolidColorBrush(Colors.Transparent);
                     break;
                 case 2:
-                    A2Rec.Fill = new SolidColorBrush(Colors.Transparent);
+                    Answer2.Foreground = new SolidColorBrush(Colors.Transparent);
                     break;
                 case 3:
-                    A3Rec.Fill = new SolidColorBrush(Colors.Transparent);
+                    Answer3.Foreground = new SolidColorBrush(Colors.Transparent);
                     break;
             }
 
@@ -382,6 +382,10 @@ namespace FinalProjectWPF.Projects.DontDropTheMillion
         private void SubmitAnswer(object sender, RoutedEventArgs e)
         {
             SubmitAnswers();
+        }
+        private void GoBack_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
         }
     }
 }

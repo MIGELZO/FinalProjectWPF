@@ -85,7 +85,7 @@ namespace FinalProjectWPF.Projects.Snake
                     ((GridCell)GameGrid.Children[index]).SetState(game.GetCellState(col, row), game.snake.direction);
                 }
             }
-            ScoreText.Text = game.Score.ToString();
+            ScoreText.Content = game.Score.ToString();
             GameGrid.Focus();
         }
 

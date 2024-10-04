@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -14,8 +13,8 @@ namespace FinalProjectWPF.Projects.Snake.Models
         {
             border = new Border
             {
-                BorderBrush = Brushes.Gray,
-                BorderThickness = new Thickness(0.7)
+                BorderBrush = Brushes.Transparent,
+
             };
             image = new Image
             {
