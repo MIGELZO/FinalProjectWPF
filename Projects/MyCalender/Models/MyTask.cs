@@ -1,4 +1,4 @@
-﻿namespace FinalProjectWPF.Projects.MyCalender.Models
+﻿namespace FinalProjectWPF.Projects.MyCalendar.Models
 {
     internal class MyTask
     {

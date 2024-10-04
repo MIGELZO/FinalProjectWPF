@@ -2,14 +2,14 @@
 using System.Windows.Controls;
 using System.Windows.Navigation;
 
-namespace FinalProjectWPF.Projects.MyCalender
+namespace FinalProjectWPF.Projects.MyCalendar
 {
     /// <summary>
     /// Interaction logic for CalenderPreviewPage.xaml
     /// </summary>
-    public partial class CalenderPreviewPage : Page
+    public partial class CalendarPreviewPage : Page
     {
-        public CalenderPreviewPage()
+        public CalendarPreviewPage()
         {
             InitializeComponent();
         }
@@ -26,7 +26,7 @@ namespace FinalProjectWPF.Projects.MyCalender
 
         private void OpenApp_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new MyCalender());
+            NavigationService.Navigate(new MyCalendar());
         }
         private void Button_ClickGameInfo(object sender, RoutedEventArgs e)
         {

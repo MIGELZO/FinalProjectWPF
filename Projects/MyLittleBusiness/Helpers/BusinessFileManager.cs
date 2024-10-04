@@ -66,6 +66,22 @@ namespace FinalProjectWPF.Projects.MyLittleBusiness.Helpers
             }
         }
 
+        public Customer? GetCustomerByInvoice(Invoice invoice)
+        {
+            ObservableCollection<Customer?> customers = GetAllCustomers();
+            foreach (Customer c in customers)
+            {
+                foreach (int invoiceID in c.Invoices)
+                {
+                    if (invoiceID == invoice.InvoiceID)
+                    {
+                        return c;
+                    }
+                }
+            }
+            return null;
+        }
+
         public void CreateNewInvoice(Invoice newInvoice)
         {
             ObservableCollection<Invoice>? invoices = GetAllInvoices() ?? new ObservableCollection<Invoice>();

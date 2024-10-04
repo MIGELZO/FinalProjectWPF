@@ -1,7 +1,7 @@
 ﻿using FinalProjectWPF.FileManagment;
 using FinalProjectWPF.Projects.CatchTheEgg;
 using FinalProjectWPF.Projects.DontDropTheMillion;
-using FinalProjectWPF.Projects.MyCalender;
+using FinalProjectWPF.Projects.MyCalendar;
 using FinalProjectWPF.Projects.MyLittleBusiness;
 using FinalProjectWPF.Projects.Snake;
 using FinalProjectWPF.Projects.TicTacToe;
@@ -23,6 +23,8 @@ namespace FinalProjectWPF
         int LoggedInUser = ((App)Application.Current).LoggedInUserID;
         public GameCenterHomePage()
         {
+            var app = (App)Application.Current;
+            app.PropertyChanged += App_PropertyChanged;
             User CurrentUser = null;
             DateTime date = new DateTime(2024, 1, 1);
             if (fm.CheckLastLoginUser().LastLogin > date)
@@ -44,6 +46,18 @@ namespace FinalProjectWPF
             LiveTime.Interval = TimeSpan.FromSeconds(1);
             LiveTime.Tick += timer_Tick;
             LiveTime.Start();
+        }
+        private void App_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(App.LastGameScore))
+            {
+                var app = (App)Application.Current;
+                var lastGameScore = app.LastGameScore;
+
+                // Handle the score change (e.g., update UI)
+                // (lastscore, gameType) / currentplayer / FileManager
+                fm.AddNewHighScore(LoggedInUser, lastGameScore.Item2, lastGameScore.Item1);
+            }
         }
 
         private void BackgroundMedia_MediaEnded(object sender, RoutedEventArgs e)
@@ -323,7 +337,7 @@ namespace FinalProjectWPF
         }
         private void CalenderApp_Click(object sender, MouseButtonEventArgs e)
         {
-            NavigationService.Navigate(new CalenderPreviewPage());
+            NavigationService.Navigate(new CalendarPreviewPage());
         }
         private void DontDTMillionApp_Click(object sender, MouseButtonEventArgs e)
         {

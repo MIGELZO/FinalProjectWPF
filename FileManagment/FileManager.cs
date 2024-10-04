@@ -44,7 +44,7 @@ namespace FinalProjectWPF.FileManagment
             return player;
         }
 
-        // modified
+
         public User UpdateUser(int userId, string name)
         {
             List<User> users = GetAllUsers() ?? new List<User>();
@@ -171,7 +171,7 @@ namespace FinalProjectWPF.FileManagment
             {
                 usersHighscores[userID] = new List<double> { score };
             }
-            if (!usersHighscores[userID].Contains(score))
+            if (!usersHighscores[userID].Contains(score) && score != 0)
             {
                 usersHighscores[userID].Add(score);
             }

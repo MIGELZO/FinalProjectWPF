@@ -1,4 +1,4 @@
-﻿using FinalProjectWPF.Projects.MyCalender.Models;
+﻿using FinalProjectWPF.Projects.MyCalendar.Models;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Windows;
@@ -7,18 +7,18 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace FinalProjectWPF.Projects.MyCalender
+namespace FinalProjectWPF.Projects.MyCalendar
 {
     /// <summary>
     /// Interaction logic for Calender.xaml
     /// </summary>
-    public partial class MyCalender : Page
+    public partial class MyCalendar : Page
     {
         private DateTime currentWeekStart;
         private const int HOURS_IN_DAY = 24;
         private TaskFileManager taskFileManager = new TaskFileManager();
         private ObservableCollection<MyTask>? tasks;
-        public MyCalender()
+        public MyCalendar()
         {
             InitializeComponent();
             InitializeDateSelectors();

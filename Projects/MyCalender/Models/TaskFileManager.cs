@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text.Json;
 
-namespace FinalProjectWPF.Projects.MyCalender.Models
+namespace FinalProjectWPF.Projects.MyCalendar.Models
 {
     internal class TaskFileManager
     {

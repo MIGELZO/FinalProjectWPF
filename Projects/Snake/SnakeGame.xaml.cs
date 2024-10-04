@@ -1,9 +1,12 @@
-﻿using FinalProjectWPF.Projects.Snake.Models;
+﻿using FinalProjectWPF.Enums;
+using FinalProjectWPF.Projects.Snake.Models;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
 using System.Windows.Threading;
+
+
 
 namespace FinalProjectWPF.Projects.Snake
 {
@@ -52,6 +55,7 @@ namespace FinalProjectWPF.Projects.Snake
             if (game.GameOver)
             {
                 gameTimer.Stop();
+                ((App)Application.Current).LastGameScore = (int.Parse(ScoreText.Content.ToString()), GameType.Snake);
                 GameOverOverlay.Visibility = Visibility.Visible;
             }
         }
