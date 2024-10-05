@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 
+
 namespace FinalProjectWPF.Projects.Snake
 {
 
@@ -12,7 +13,7 @@ namespace FinalProjectWPF.Projects.Snake
     {
         FileManager fm;
         int LoggedInUser;
-        ObservableCollection<double> GameScoreData;
+        public ObservableCollection<PlayerScore> GameScoreData { get; set; } = new ObservableCollection<PlayerScore>();
         GameType Snake;
         public SnakePreviewPage()
         {
@@ -20,7 +21,7 @@ namespace FinalProjectWPF.Projects.Snake
             fm = (FileManager)((App)Application.Current).fmGlobal;
             LoggedInUser = ((App)Application.Current).LoggedInUserID;
 
-            GameScoreData = fm.GetUserHighScoresForGame(LoggedInUser, Snake);
+            GameScoreData = fm.GetAllPlayersHighScores(GameType.Snake);
             ScoreBoard.ItemsSource = GameScoreData;
         }
         private void BackgroundMedia_MediaEnded(object sender, RoutedEventArgs e)
@@ -30,7 +31,7 @@ namespace FinalProjectWPF.Projects.Snake
         }
         private void GoBack_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.GoBack();
+            NavigationService.Navigate(new GameCenterHomePage());
         }
 
         private void OpenApp_Click(object sender, RoutedEventArgs e)

@@ -1,6 +1,8 @@
 ﻿using FinalProjectWPF.Projects.MyLittleBusiness.Helpers;
 using FinalProjectWPF.Projects.MyLittleBusiness.Models;
+using Microsoft.Win32;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -21,6 +23,7 @@ namespace FinalProjectWPF.Projects.MyLittleBusiness
         {
             InitializeComponent();
             UpdateCollection();
+            SetGlobalApiSecrets.Click += SetGlobalApiSecrets_Click;
         }
 
         private void UpdateCollection()
@@ -62,6 +65,8 @@ namespace FinalProjectWPF.Projects.MyLittleBusiness
 
             if (!ValidateInvoice(invoiceType, invoiceTypeKind))
             {
+                CreateInvoiceButton.Content = "Create Invoice";
+                CreateOrderButton.Content = "Create Order";
                 return;
             }
 
@@ -219,6 +224,8 @@ namespace FinalProjectWPF.Projects.MyLittleBusiness
             MessageBox.Show("successfully finish invoice send: " + responseValues["InvoiceID"]);
             UpdateCollection();
             CleanAllForms();
+            CreateInvoiceButton.Content = "Create Invoice";
+            CreateOrderButton.Content = "Create Order";
         }
 
         private void Button_Click_ManuNav(object sender, RoutedEventArgs e)
@@ -489,7 +496,7 @@ namespace FinalProjectWPF.Projects.MyLittleBusiness
 
         private void RadioButton_ExitApp(object sender, RoutedEventArgs e)
         {
-            // navigate out to home
+            NavigationService.GoBack();
         }
 
         private void Button_ClickNewProductLine(object sender, RoutedEventArgs e)
@@ -523,7 +530,7 @@ namespace FinalProjectWPF.Projects.MyLittleBusiness
             newProductLine.Children.Add(deleteButton);
 
             // Add TextBoxes for Product ID, Description, Price, Quantity, and Total Price
-            TextBox productIDTextBox = new TextBox { Name = $"{kind}prodID", Margin = new Thickness(5, 0, 5, 0), Style = (Style)FindResource("TextBoxFilterBar") };
+            TextBox productIDTextBox = new TextBox { Name = $"{kind}prodID", Margin = new Thickness(5, 0, 5, 0), IsReadOnly = true, Style = (Style)FindResource("TextBoxFilterBar") };
             Grid.SetColumn(productIDTextBox, 1);
             newProductLine.Children.Add(productIDTextBox);
 
@@ -786,6 +793,27 @@ namespace FinalProjectWPF.Projects.MyLittleBusiness
             UpdateInvoiceBalance();
         }
 
+        public void SendToEmail(object sender, RoutedEventArgs e)
+        {
+            Button clickedButton = sender as Button;
+
+            // Extract the bound Invoice object from the Tag
+            if (clickedButton != null && clickedButton.Tag is Invoice invoice)
+            {
+                // Access DocumentNumber and DocumentType
+                int invoiceNumber = invoice.InvoiceID;
+                int invoiceType = invoice.InvoiceType;
+                Customer? thisCus = FM.GetCustomerById(invoice.CustomerID);
+                if (thisCus != null)
+                {
+                    string email = thisCus.Email;
+                    string response = AM.SendInvoiceToEmail(invoiceNumber, invoiceType, email);
+                    MessageBox.Show(response);
+                }
+            }
+
+        }
+
         private bool ValidateInvoice(int invoiceType, char invoiceKind)
         {
             // Validate Customer Information
@@ -967,35 +995,52 @@ namespace FinalProjectWPF.Projects.MyLittleBusiness
 
         private async void SendInvoiceButton_Click(object sender, RoutedEventArgs e)
         {
+            CreateInvoiceButton.IsEnabled = false;
+            CreateOrderButton.IsEnabled = false;
+            CreateOrderButton.Content = "sendind...";
+            CreateInvoiceButton.Content = "sendind...";
+            await Task.Delay(100);
             await SendInvoiceButton();
-            CleanAllForms();
         }
 
         private async void DocDownButton_Click(object sender, RoutedEventArgs e)
         {
-            //Button clickedButton = sender as Button;
-            //// Extract the bound Invoice object from the Tag
-            //if (clickedButton != null && clickedButton.Tag is Invoice invoice)
-            //{
-            //    // Access DocumentNumber and DocumentType
-            //    int invoiceNumber = invoice.InvoiceID;
-            //    int invoiceType = invoice.InvoiceType;
+            Button clickedButton = sender as Button;
+            // Extract the bound Invoice object from the Tag
+            if (clickedButton != null && clickedButton.Tag is Invoice invoice)
+            {
+                // Access DocumentNumber and DocumentType
+                int invoiceNumber = invoice.InvoiceID;
+                int invoiceType = invoice.InvoiceType;
 
-            //    // Call the download method and get the PDF as a byte array
-            //    byte[] pdfData = AM.DownloadDocumentPDF(invoiceNumber, invoiceType, true);
-            //    if (pdfData != null)
-            //    {
-            //        // Save the PDF file as a binary file
-            //        string filePath = $"{invoiceNumber.ToString()}_{DateTime.Now.Hour}.pdf";
-            //        File.WriteAllBytes(filePath, pdfData);
+                // Call the download method and get the PDF as a byte array
+                byte[] pdfData = AM.DownloadDocumentPDF(invoiceNumber, invoiceType, true);
+                if (pdfData != null)
+                {
+                    // Open SaveFileDialog to let the user select where to save the PDF
+                    SaveFileDialog saveFileDialog = new SaveFileDialog
+                    {
+                        FileName = $"{invoiceNumber.ToString()}_{DateTime.Now.Hour}.pdf", // Default file name
+                        Filter = "PDF files (*.pdf)|*.pdf", // Filter to show only PDF files
+                        DefaultExt = ".pdf", // Default file extension
+                        Title = "Save PDF Document"
+                    };
 
-            //        MessageBox.Show("File downloaded successfully to " + filePath);
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show("Failed to download the document.");
-            //    }
-            //}
+                    // Show the dialog and get the selected file path
+                    if (saveFileDialog.ShowDialog() == true)
+                    {
+                        string filePath = saveFileDialog.FileName;
+
+                        // Save the PDF file
+                        File.WriteAllBytes(filePath, pdfData);
+                        MessageBox.Show("File downloaded successfully to " + filePath);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Failed to download the document.");
+                }
+            }
         }
 
 
@@ -1039,7 +1084,6 @@ namespace FinalProjectWPF.Projects.MyLittleBusiness
         private void CreateNewItem_Click(object sender, RoutedEventArgs e)
         {
             Button clickedButton = sender as Button;
-
             int newID = FM.GetNextItemID();
 
             FM.CreateItem(newID, NewItemDescription.Text, decimal.Parse(NewItemPrice.Text));
@@ -1107,7 +1151,7 @@ namespace FinalProjectWPF.Projects.MyLittleBusiness
             // Extract the bound Invoice object from the Tag
             if (clickedButton != null && clickedButton.Tag is Invoice invoice)
             {
-                if (invoice.DealNumber != "" && invoice.IsRefunded != false)
+                if (invoice.DealNumber != "" && !invoice.IsRefunded)
                 {
                     // Access DocumentNumber and DocumentType
                     int DealNumber = int.Parse(invoice.DealNumber);
@@ -1192,6 +1236,7 @@ namespace FinalProjectWPF.Projects.MyLittleBusiness
             EditItemPop.Visibility = Visibility.Hidden;
             GetItemPop.Visibility = Visibility.Hidden;
             GetCustomerPop.Visibility = Visibility.Visible;
+            AppSettingsPop.Visibility = Visibility.Hidden;
         }
 
         private void Button_ClickGetItem(object sender, RoutedEventArgs e)
@@ -1201,6 +1246,7 @@ namespace FinalProjectWPF.Projects.MyLittleBusiness
             EditItemPop.Visibility = Visibility.Hidden;
             GetItemPop.Visibility = Visibility.Visible;
             GetCustomerPop.Visibility = Visibility.Hidden;
+            AppSettingsPop.Visibility = Visibility.Hidden;
         }
         private void Button_ClickCreateNewItem(object sender, RoutedEventArgs e)
         {
@@ -1209,14 +1255,145 @@ namespace FinalProjectWPF.Projects.MyLittleBusiness
             EditItemPop.Visibility = Visibility.Hidden;
             GetItemPop.Visibility = Visibility.Hidden;
             GetCustomerPop.Visibility = Visibility.Hidden;
+            AppSettingsPop.Visibility = Visibility.Hidden;
         }
         private void Button_ClickEditItem(object sender, RoutedEventArgs e)
         {
+            Button clickedButton = sender as Button;
+            if (clickedButton != null && clickedButton.Tag is Item item)
+            {
+                EditItemDescription.Text = item.Name;
+                EditItemPrice.Text = item.Price.ToString();
+                EditItemID.Text = item.ItemId.ToString();
+            }
+
             PopUpWindow.IsOpen = true;
             AddItemPop.Visibility = Visibility.Hidden;
             EditItemPop.Visibility = Visibility.Visible;
             GetItemPop.Visibility = Visibility.Hidden;
             GetCustomerPop.Visibility = Visibility.Hidden;
+            AppSettingsPop.Visibility = Visibility.Hidden;
+        }
+        private void Button_ClickAppSettings(object sender, RoutedEventArgs e)
+        {
+            Button clickedButton = sender as Button;
+
+            PopUpWindow.IsOpen = true;
+            AddItemPop.Visibility = Visibility.Hidden;
+            EditItemPop.Visibility = Visibility.Hidden;
+            GetItemPop.Visibility = Visibility.Hidden;
+            GetCustomerPop.Visibility = Visibility.Hidden;
+            AppSettingsPop.Visibility = Visibility.Visible;
+        }
+        private void EditItemButton_Click(object sender, RoutedEventArgs e)
+        {
+            FM.UpdateItem(int.Parse(EditItemID.Text), EditItemDescription.Text, decimal.Parse(EditItemPrice.Text));
+            UpdateCollection();
+            PopUpWindow.IsOpen = false;
+        }
+
+        private void NewItemDescription_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CreateItemBUT.IsEnabled = ValidateItemInput("create");
+        }
+
+        private void NewItemPrice_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CreateItemBUT.IsEnabled = ValidateItemInput("create");
+        }
+
+        // For Edit Item Pop-Up
+        private void EditItemDescription_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            EditItemBUT.IsEnabled = ValidateItemInput("edit");
+        }
+
+        private void EditItemPrice_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            EditItemBUT.IsEnabled = ValidateItemInput("edit");
+        }
+
+        private bool ValidateItemInput(string action)
+        {
+            switch (action)
+            {
+                case "edit":
+                    {
+                        // Validate item name (cannot be empty)
+                        if (string.IsNullOrWhiteSpace(EditItemDescription.Text))
+                        {
+                            return false;
+                        }
+
+                        // Validate price (should be a positive number)
+                        if (!decimal.TryParse(EditItemPrice.Text, out decimal price) || price <= 0)
+                        {
+                            return false;
+                        }
+                        break;
+                    }
+                case "create":
+                    {
+                        // Validate item name (cannot be empty)
+                        if (string.IsNullOrWhiteSpace(NewItemDescription.Text))
+                        {
+                            return false;
+                        }
+
+                        // Validate price (should be a positive number)
+                        if (!decimal.TryParse(NewItemPrice.Text, out decimal price) || price <= 0)
+                        {
+                            return false;
+                        }
+                        break;
+                    }
+            }
+
+            return true;
+        }
+
+        private void Button_ClickDeleteItem(object sender, RoutedEventArgs e)
+        {
+            Button clickedButton = sender as Button;
+
+            // Extract the bound Invoice object from the Tag
+            if (clickedButton != null && clickedButton.Tag is Item item)
+            {
+                FM.DeleteItem(item.ItemId);
+                UpdateCollection();
+            }
+        }
+
+        private void SetCustomerToInvoice_Click(object sender, RoutedEventArgs e)
+        {
+            Button clickedButton = sender as Button;
+            RadioButton chargingButton = new RadioButton
+            {
+                Name = "chargingBUT"
+            };
+            Button_Click_ManuNav(chargingButton, e);
+            if (clickedButton != null && clickedButton.Tag is Customer customer)
+            {
+                // go to invoice page 
+                IcustomerName.Text = customer.FullName;
+                IcustomerEmail.Text = customer.Email;
+                IcustomerPhone.Text = customer.Phone;
+            }
+
+        }
+
+        private void SetGlobalApiSecrets_Click(object sender, RoutedEventArgs e)
+        {
+            string username = ApiUserName.Text;
+            string password = ApiPassword.Text;
+            string terminalNumber = ApiTerminalNumber.Text;
+
+            Environment.SetEnvironmentVariable("UserName", username, EnvironmentVariableTarget.User);
+            Environment.SetEnvironmentVariable("UserPassword", password, EnvironmentVariableTarget.User);
+            Environment.SetEnvironmentVariable("TerminalNumber", terminalNumber, EnvironmentVariableTarget.User);
+
+            MessageBox.Show("API secrets saved successfully.");
+            PopUpWindow.IsOpen = false;
         }
     }
 }

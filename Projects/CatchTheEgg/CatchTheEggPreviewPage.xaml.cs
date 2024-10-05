@@ -13,7 +13,7 @@ namespace FinalProjectWPF.Projects.CatchTheEgg
     {
         FileManager fm;
         int LoggedInUser;
-        ObservableCollection<double> GameScoreData;
+        public ObservableCollection<PlayerScore> GameScoreData { get; set; } = new ObservableCollection<PlayerScore>();
         GameType CatchTheEgg;
 
 
@@ -23,7 +23,7 @@ namespace FinalProjectWPF.Projects.CatchTheEgg
             fm = (FileManager)((App)Application.Current).fmGlobal;
             LoggedInUser = ((App)Application.Current).LoggedInUserID;
 
-            GameScoreData = fm.GetUserHighScoresForGame(LoggedInUser, CatchTheEgg);
+            GameScoreData = fm.GetAllPlayersHighScores(GameType.CatchTheEgg);
             ScoreBoard.ItemsSource = GameScoreData;
         }
 
@@ -35,8 +35,7 @@ namespace FinalProjectWPF.Projects.CatchTheEgg
 
         private void GoBack_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.GoBack();
-
+            NavigationService.Navigate(new GameCenterHomePage());
         }
 
         private void OpenApp_Click(object sender, RoutedEventArgs e)

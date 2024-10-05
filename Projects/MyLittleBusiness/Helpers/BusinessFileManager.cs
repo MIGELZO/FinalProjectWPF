@@ -15,7 +15,7 @@ namespace FinalProjectWPF.Projects.MyLittleBusiness.Helpers
         {
             InitializeFromDataFile();
         }
-
+        // modify
         public Customer CreateCustomer(Customer customer, Invoice invoice)
         {
             ObservableCollection<Customer> customers = GetAllCustomers();
@@ -36,6 +36,7 @@ namespace FinalProjectWPF.Projects.MyLittleBusiness.Helpers
             return customer;
         }
 
+        // modify
         public ObservableCollection<Customer> GetAllCustomers()
         {
             try
@@ -53,6 +54,13 @@ namespace FinalProjectWPF.Projects.MyLittleBusiness.Helpers
             }
         }
 
+        public Customer? GetCustomerById(int customerID)
+        {
+            ObservableCollection<Customer> customers = GetAllCustomers();
+            Customer customer = customers.FirstOrDefault(c => c.CustomerID == customerID);
+            return customer == null ? null : customer;
+        }
+
         public ObservableCollection<Invoice>? GetAllInvoices()
         {
             try
@@ -66,6 +74,7 @@ namespace FinalProjectWPF.Projects.MyLittleBusiness.Helpers
             }
         }
 
+        //modify
         public Customer? GetCustomerByInvoice(Invoice invoice)
         {
             ObservableCollection<Customer?> customers = GetAllCustomers();
@@ -105,6 +114,7 @@ namespace FinalProjectWPF.Projects.MyLittleBusiness.Helpers
                 throw new Exception("Invoice not found");
             }
         }
+
 
         public ObservableCollection<Invoice> GetAllInvoices(int type)
         {
@@ -150,6 +160,7 @@ namespace FinalProjectWPF.Projects.MyLittleBusiness.Helpers
             }
         }
 
+        //modify
         public int GetNextItemID()
         {
             ObservableCollection<Item>? items = GetAllItems() ?? new ObservableCollection<Item>();
@@ -157,6 +168,7 @@ namespace FinalProjectWPF.Projects.MyLittleBusiness.Helpers
             return id;
         }
 
+        //modify
         public Item CreateItem(int id, string name, decimal price)
         {
             ObservableCollection<Item> items = GetAllItems() ?? new ObservableCollection<Item>();
@@ -205,11 +217,14 @@ namespace FinalProjectWPF.Projects.MyLittleBusiness.Helpers
             return filteredInvoices;
         }
 
+
+
+        // modify
         public void InitializeFromDataFile()
         {
             if (!File.Exists(CustomersFilePath))
             {
-                string CustomerInitialData = "[{\"CustomerID\":0,\"FullName\":\"General Customer\",\"Email\":\"MyLittleBusiness@daniel.com\",\"Phone\":\"0500000000\",\"Invoices\":[],\"Orders\":{}}]";
+                string CustomerInitialData = "[{\"CustomerID\":0,\"FullName\":\"General Customer\",\"Email\":\"MyLittleBusiness@gmail.com\",\"Phone\":\"0500000000\",\"Invoices\":[],\"Orders\":{}}]";
                 File.WriteAllText(CustomersFilePath, CustomerInitialData);
             }
             if (!File.Exists(ItemsFilePath))

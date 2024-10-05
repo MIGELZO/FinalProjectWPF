@@ -103,7 +103,7 @@ namespace FinalProjectWPF.Projects.Snake
 
         private void GoBack_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.GoBack();
+            NavigationService.Navigate(new SnakePreviewPage());
         }
     }
 }

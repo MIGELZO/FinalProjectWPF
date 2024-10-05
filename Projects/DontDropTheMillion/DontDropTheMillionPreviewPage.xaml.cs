@@ -14,15 +14,14 @@ namespace FinalProjectWPF.Projects.DontDropTheMillion
     {
         FileManager fm;
         int LoggedInUser;
-        ObservableCollection<double> GameScoreData;
+        public ObservableCollection<PlayerScore> GameScoreData { get; set; } = new ObservableCollection<PlayerScore>();
         GameType DontDropTheMillion;
         public DontDropTheMillionPreviewPage()
         {
             InitializeComponent();
             fm = (FileManager)((App)Application.Current).fmGlobal;
             LoggedInUser = ((App)Application.Current).LoggedInUserID;
-
-            GameScoreData = fm.GetUserHighScoresForGame(LoggedInUser, DontDropTheMillion);
+            GameScoreData = fm.GetAllPlayersHighScores(GameType.DontDropTheMillion);
             ScoreBoard.ItemsSource = GameScoreData;
         }
 
@@ -33,7 +32,7 @@ namespace FinalProjectWPF.Projects.DontDropTheMillion
         }
         private void GoBack_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.GoBack();
+            NavigationService.Navigate(new GameCenterHomePage());
         }
 
         private void OpenApp_Click(object sender, RoutedEventArgs e)

@@ -1,4 +1,5 @@
-﻿using FinalProjectWPF.Projects.CatchTheEgg.Models;
+﻿using FinalProjectWPF.Enums;
+using FinalProjectWPF.Projects.CatchTheEgg.Models;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -33,7 +34,7 @@ namespace FinalProjectWPF.Projects.CatchTheEgg
 
             Basket.Fill = basket;
             MyCanvas.Background = backgroundImage;
-            gameManager = new GameManager(MyCanvas, new Basket(Canvas.GetLeft(Basket), Basket.Width), 10);
+            gameManager = new GameManager(MyCanvas, new Basket(Canvas.GetLeft(Basket), Basket.Width));
             DataContext = gameManager.PlayerBasket;
 
 
@@ -61,6 +62,7 @@ namespace FinalProjectWPF.Projects.CatchTheEgg
             if (gameManager.IsGameOver())
             {
                 GameTimer.Stop();
+                ((App)Application.Current).LastGameScore = (gameManager.Score, GameType.CatchTheEgg);
                 MessageBox.Show($"You Lost!\nYour Score: {gameManager.Score}\nClick to play again", "Catch The Egg");
                 ResetGame();
             }
@@ -89,6 +91,10 @@ namespace FinalProjectWPF.Projects.CatchTheEgg
             double newHeight = MyCanvas.ActualHeight;
             gameManager.PlayerBasket.Size = newWidth * 0.1;
             gameManager.PlayerBasket.Size = newHeight * 0.1;
+        }
+        private void GoBack_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new CatchTheEggPreviewPage());
         }
     }
 }

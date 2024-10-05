@@ -4,7 +4,6 @@
     {
         Snake,
         CatchTheEgg,
-        BattleShip,
         DontDropTheMillion
     }
 }

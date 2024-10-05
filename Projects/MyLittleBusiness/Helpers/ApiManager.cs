@@ -20,8 +20,9 @@ namespace FinalProjectWPF.Projects.MyLittleBusiness.Helpers
         {
             if (!CheckUserInformationExist())
             {
-                MessageBox.Show("Please enter API secrets in Enviorment variables");
-            };
+                MessageBox.Show("Please enter API secrets in Environment variables");
+            }
+
         }
         // Method to cancel a deal
         public async Task<string> CancelDeal(int internalDealNumber, decimal? partialSum = null)
@@ -41,11 +42,17 @@ namespace FinalProjectWPF.Projects.MyLittleBusiness.Helpers
         }
 
         // Method to download a PDF of the document
-        public string DownloadDocumentPDF(int documentNumber, int documentType, bool isOriginal)
+        public byte[] DownloadDocumentPDF(int documentNumber, int documentType, bool isOriginal)
         {
             string url = $"{baseUrl}/GetDocumentPDF.aspx?UserName={username}&UserPassword={password}&DocumentNumber={documentNumber}&DocumentType={documentType}&IsOriginal={isOriginal}";
             var response = client.GetAsync(url).Result; // Synchronously wait for the result
-            return response.Content.ReadAsStringAsync().Result; // Read response content
+            if (response.IsSuccessStatusCode)
+            {
+                // Read the content as a byte array
+                return response.Content.ReadAsByteArrayAsync().Result;
+            }
+
+            return null;
         }
 
         // Method to download HTML of the invoice
@@ -104,9 +111,10 @@ namespace FinalProjectWPF.Projects.MyLittleBusiness.Helpers
             }
             else if (invoiceType == 2 && cardNumber != null)
             {
-                string cardExipration = cardValidityMonth + "" + cardValidityYear;
+                string cardExipration = cardValidityMonth.ToString() + "" + cardValidityYear.ToString().Substring(2);
 
                 cancelDealNumber = await RefundCreditCard(cardNumber, cardExipration, securityCVV, paymentsAmount, cardSum, customerName);
+                MessageBox.Show(cancelDealNumber);
                 urlTemp = $"{baseUrl}/CreateInvoice.aspx?";
             }
             else
@@ -131,7 +139,7 @@ namespace FinalProjectWPF.Projects.MyLittleBusiness.Helpers
                 }
                 else if (cardNumber != null && invoiceType == 2)
                 {
-                    url += $"CreditDealNum.DealNumber{cancelDealNumber}";
+                    url += $"&CreditDealNum.DealNumber={cancelDealNumber}";
                 }
                 if (customPays != null)
                 {
@@ -188,12 +196,30 @@ namespace FinalProjectWPF.Projects.MyLittleBusiness.Helpers
             var content = new StringContent(json, Encoding.UTF8, "application/json");
             string url = "https://secure.cardcom.solutions/api/v11/Transactions/Transaction";
             var response = await client.PostAsync(url, content);
-            response.EnsureSuccessStatusCode();
-            string responseData = await response.Content.ReadAsStringAsync();
-            var responseObject = JsonSerializer.Deserialize<JsonElement>(responseData);
-            string dealNumber = responseObject.GetProperty("TranzactionId").GetInt64().ToString();
-            return dealNumber;
+
+            // Check if the response is successful
+            if (response.IsSuccessStatusCode)
+            {
+                string responseData = await response.Content.ReadAsStringAsync();
+
+                var responseObject = JsonSerializer.Deserialize<JsonElement>(responseData);
+                if (responseObject.TryGetProperty("TranzactionId", out var tranzactionId))
+                {
+                    string dealNumber = tranzactionId.GetInt64().ToString();
+                    MessageBox.Show($"Transaction ID: {dealNumber}");
+                    return dealNumber;
+                }
+            }
+            else
+            {
+                // Log error response
+                string errorResponse = await response.Content.ReadAsStringAsync();
+                MessageBox.Show($"Error Response: {errorResponse}");
+            }
+
+            return null;
         }
+
 
         public string FormatChequesForRequest(List<Cheque> cheques)
         {
@@ -221,12 +247,12 @@ namespace FinalProjectWPF.Projects.MyLittleBusiness.Helpers
 
             // Initialize the dictionary to store extracted values
             Dictionary<string, string?> extractedValues = new Dictionary<string, string?>
-     {
-         { "InvoiceID", null },
-         { "DealNumber", null },
-         { "ResponseCode", null },
-         { "CustomerID", null }
-     };
+            {
+                { "InvoiceID", null },
+                { "DealNumber", null },
+                { "ResponseCode", null },
+                { "CustomerID", null }
+            };
 
             // Extract InvoiceID
             string? invoiceId = parsedResponse["InvoiceNumber"];
@@ -262,5 +288,7 @@ namespace FinalProjectWPF.Projects.MyLittleBusiness.Helpers
 
             return extractedValues;
         }
+
+
     }
 }

@@ -9,6 +9,8 @@ namespace FinalProjectWPF.Projects.MyCalender.UserControls
     /// </summary>
     public partial class Item : UserControl
     {
+        public delegate void EditButtonClickedHandler(object sender, EventArgs e);
+        public event EditButtonClickedHandler EditButtonClicked;
         public Item()
         {
             InitializeComponent();
@@ -60,7 +62,7 @@ namespace FinalProjectWPF.Projects.MyCalender.UserControls
 
         private void EditButton_Click(object sender, RoutedEventArgs e)
         {
-            TaskPopup.IsOpen = true;
+            EditButtonClicked?.Invoke(this, EventArgs.Empty);
         }
     }
     //--------------

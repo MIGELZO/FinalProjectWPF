@@ -29,9 +29,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <Button HorizontalAlignment="Left" ToolTip="Home Pase" Margin="20 28 0 35" Style="{StaticResource TopButton}">
-                        <Image Source="Assets\HomeIcon.png" Width="15" Height="15" />
-                    </Button>
+                    <Border HorizontalAlignment="Left" ToolTip="Home Pase" Margin="20 28 0 35"/>
 
                     <Border Grid.Row="1" Background="#623ed0" CornerRadius="0 50 0 30">
                         <DockPanel>
@@ -102,7 +100,7 @@
                            Panel.ZIndex="1" Text="Test Terminal 1001"/>
                     </Grid>
 
-                    <Button Style="{StaticResource TopButton}" ToolTip="Terminal Settings" Margin="0 0 20 0" HorizontalAlignment="Right">
+                    <Button Style="{StaticResource TopButton}" ToolTip="Terminal Settings" Margin="0 0 20 0" HorizontalAlignment="Right" Click="Button_ClickAppSettings">
                         <Image Source="Assets\SettingsIcon.png" Width="15" Height="15" />
                     </Button>
 
@@ -247,7 +245,7 @@
                                     <Button Grid.Column="0" ToolTip="First Line Cannot Be Deleted!!" Style="{StaticResource TopButton}" HorizontalAlignment="Left">
                                         <Image Source="Assets\DeleteIcon.png" Width="15" Height="15" />
                                     </Button>
-                                    <TextBox x:Name="IprodID" Grid.Column="2" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}"/>
+                                    <TextBox x:Name="IprodID" IsReadOnly="True" Grid.Column="2" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}"/>
                                     <TextBox x:Name="IprodDescription" Grid.Column="3" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}"/>
                                     <TextBox x:Name="IprodPrice" Grid.Column="4" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}" TextChanged="InvoiceLine_TextChanged"/>
                                     <TextBox x:Name="IprodQuantity" Text="1" Grid.Column="5" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}" TextChanged="InvoiceLine_TextChanged"/>
@@ -645,7 +643,7 @@
                                     <Button Grid.Row="1" Grid.Column="0" Style="{StaticResource TopButton}" ToolTip="First Line Cannot Be Deleted!!" HorizontalAlignment="Left">
                                         <Image Source="Assets\DeleteIcon.png" Width="15" Height="15" />
                                     </Button>
-                                    <TextBox x:Name="OprodID" Grid.Column="2" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}"/>
+                                    <TextBox x:Name="OprodID" IsReadOnly="true" Grid.Column="2" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}"/>
                                     <TextBox x:Name="OprodDescription" Grid.Column="3" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}"/>
                                     <TextBox x:Name="OprodPrice" Grid.Column="4" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}" TextChanged="InvoiceLine_TextChanged"/>
                                     <TextBox x:Name="OprodQuantity" Text="1" Grid.Column="5" Margin="5 0 5 0" Style="{StaticResource TextBoxFilterBar}" TextChanged="InvoiceLine_TextChanged"/>
@@ -717,10 +715,10 @@
                                                     <!--<Button x:Name="DocShowButton" Visibility="Visible" Style="{StaticResource GridShowButton}" ToolTip="Show Document">
                                                     <Image Source="Assets\ShowIcon.png" Style="{StaticResource GridImageIcon}"/>
                                                 </Button>-->
-                                                    <Button x:Name="DocDownButton" Style="{StaticResource GridShowButton}" Margin="10 0 0 0" ToolTip="Download Document">
+                                                    <Button x:Name="DocDownButton" Tag="{Binding}" Style="{StaticResource GridShowButton}" Margin="10 0 0 0" ToolTip="Download Document" Click="DocDownButton_Click">
                                                         <Image Source="Assets\DownloadIcon.png" Style="{StaticResource GridImageIcon}"/>
                                                     </Button>
-                                                    <Button x:Name="DocRefundButton" Style="{StaticResource GridDownloadButton}" Margin="10 0 0 0" ToolTip="Refund Deal">
+                                                    <Button x:Name="DocRefundButton" Tag="{Binding}" Style="{StaticResource RefundButtonStyle}" Margin="10 0 0 0" ToolTip="Refund Deal" Click="DocRefundButton_Click">
                                                         <Image Source="Assets\RefundIcon.png" Style="{StaticResource GridImageIcon}"/>
                                                     </Button>
                                                 </StackPanel>
@@ -732,13 +730,10 @@
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal">
-                                                    <Button x:Name="DocShowButton" Visibility="Visible" Style="{StaticResource GridShowButton}" ToolTip="Show Document">
-                                                        <Image Source="Assets\ShowIcon.png" Style="{StaticResource GridImageIcon}"/>
-                                                    </Button>
-                                                    <Button x:Name="DocDownButton" Style="{StaticResource GridShowButton}" Margin="10 0 0 0" ToolTip="Download Document">
+                                                    <Button x:Name="DocDownButton" Tag="{Binding}" Style="{StaticResource GridShowButton}" Margin="10 0 0 0" ToolTip="Download Document" Click="DocDownButton_Click">
                                                         <Image Source="Assets\DownloadIcon.png" Style="{StaticResource GridImageIcon}"/>
                                                     </Button>
-                                                    <Button x:Name="DocSendButton" Style="{StaticResource GridShowButton}" Margin="10 0 0 0" ToolTip="Send To Mail">
+                                                    <Button x:Name="DocSendButton" Tag="{Binding}" Style="{StaticResource GridShowButton}" Margin="10 0 0 0" ToolTip="Send To Mail" Click="DocSendEmailButton_Click">
                                                         <Image Source="Assets\SendIcon.png" Style="{StaticResource GridImageIcon}"/>
                                                     </Button>
                                                 </StackPanel>
@@ -771,10 +766,10 @@
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal">
-                                                    <Button Style="{StaticResource GridShowButton}" ToolTip="Edit Item" Click="Button_ClickEditItem">
+                                                    <Button Tag="{Binding}" Style="{StaticResource GridShowButton}" ToolTip="Edit Item" Click="Button_ClickEditItem">
                                                         <Image Source="Assets\EditIcon.png" Style="{StaticResource GridImageIcon}"/>
                                                     </Button>
-                                                    <Button Style="{StaticResource GridShowButton}" Margin="10 0 0 0" ToolTip="Delete Item">
+                                                    <Button Tag="{Binding}" Style="{StaticResource GridShowButton}" Margin="10 0 0 0" ToolTip="Delete Item" Click="Button_ClickDeleteItem">
                                                         <Image Source="Assets\DeleteIcon.png" Style="{StaticResource GridImageIcon}"/>
                                                     </Button>
                                                 </StackPanel>
@@ -800,7 +795,7 @@
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal">
-                                                    <Button Style="{StaticResource GridShowButton}" ToolTip="Create Document To Customer">
+                                                    <Button Tag="{Binding}" Style="{StaticResource GridShowButton}" ToolTip="Create Document To Customer" Click="SetCustomerToInvoice_Click">
                                                         <Image Source="Assets\InvoiceIcon.png" Style="{StaticResource GridImageIcon}"/>
                                                     </Button>
                                                 </StackPanel>
@@ -846,24 +841,25 @@
                                 <TextBlock Text="Add New Item :" HorizontalAlignment="Center" Margin="0 5 0 5" FontSize="20" FontWeight="Bold" Style="{StaticResource TextBlockStyle}"/>
 
                                 <TextBlock Text="Description :" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 5 5 5" FontSize="13" FontWeight="SemiBold" Style="{StaticResource TextBlockStyle}"/>
-                                <TextBox x:Name="NewItemDescription" Margin="10 5 5 5" Style="{StaticResource TextBoxFilterBar}"/>
+                                <TextBox x:Name="NewItemDescription" Margin="10 5 5 5" Style="{StaticResource TextBoxFilterBar}" TextChanged="NewItemDescription_TextChanged"/>
                                 <TextBlock Text="Price :" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 5 5 5" FontSize="13" FontWeight="SemiBold" Style="{StaticResource TextBlockStyle}"/>
-                                <TextBox x:Name="NewItemPrice" Margin="10 5 5 5" Style="{StaticResource TextBoxFilterBar}"/>
+                                <TextBox x:Name="NewItemPrice" Margin="10 5 5 5" Style="{StaticResource TextBoxFilterBar}" TextChanged="NewItemPrice_TextChanged"/>
                                 <Separator Height="1" Background="#dae2ea" Margin="0 3 0 10"/>
-                                <Button x:Name="CreateItemBUT" Content="Create Item" HorizontalAlignment="Center" IsEnabled="False" Style="{StaticResource WideButton}"/>
+                                <Button x:Name="CreateItemBUT" Content="Create Item" HorizontalAlignment="Center" IsEnabled="False" Style="{StaticResource WideButton}" Click="CreateNewItem_Click"/>
                             </StackPanel>
 
                             <!--Edit Item-->
 
                             <StackPanel x:Name="EditItemPop" Grid.Row="0" Visibility="Hidden" Orientation="Vertical" Width="500" Height="300" Background="White">
                                 <TextBlock Text="Edit Item :" HorizontalAlignment="Center" Margin="0 5 0 5" FontSize="20" FontWeight="Bold" Style="{StaticResource TextBlockStyle}"/>
+                                <TextBox x:Name="EditItemID" Visibility="Hidden"/>
 
                                 <TextBlock Text="Description :" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 5 5 5" FontSize="13" FontWeight="SemiBold" Style="{StaticResource TextBlockStyle}"/>
-                                <TextBox x:Name="EditItemDescription" Margin="10 5 5 5" Style="{StaticResource TextBoxFilterBar}"/>
+                                <TextBox x:Name="EditItemDescription" Margin="10 5 5 5" Style="{StaticResource TextBoxFilterBar}" TextChanged="EditItemDescription_TextChanged"/>
                                 <TextBlock Text="Price :" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 5 5 5" FontSize="13" FontWeight="SemiBold" Style="{StaticResource TextBlockStyle}"/>
-                                <TextBox x:Name="EditItemPrice" Margin="10 5 5 5" Style="{StaticResource TextBoxFilterBar}"/>
+                                <TextBox x:Name="EditItemPrice" Margin="10 5 5 5" Style="{StaticResource TextBoxFilterBar}" TextChanged="EditItemPrice_TextChanged"/>
                                 <Separator Height="1" Background="#dae2ea" Margin="0 3 0 10"/>
-                                <Button x:Name="EditItemBUT" Content="Edit Item" HorizontalAlignment="Center" IsEnabled="False" Style="{StaticResource WideButton}"/>
+                                <Button  x:Name="EditItemBUT" Content="Edit Item" HorizontalAlignment="Center" IsEnabled="False" Style="{StaticResource WideButton}" Click="EditItemButton_Click"/>
                             </StackPanel>
 
                             <!--Get Item-->
@@ -882,8 +878,8 @@
                                                 <DataGridTemplateColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <StackPanel Orientation="Horizontal">
-                                                            <Button Style="{StaticResource GridShowButton}" ToolTip="Edit Item" Click="Button_ClickEditItem">
-                                                                <Image Source="Assets\EditIcon.png" Style="{StaticResource GridImageIcon}"/>
+                                                            <Button Tag="{Binding}" Style="{StaticResource GridShowButton}" ToolTip="Edit Item" Click="Button_ClickAddItemToInvoice">
+                                                                <Image Source="Assets\InvoiceIcon.png" Style="{StaticResource GridImageIcon}"/>
                                                             </Button>
                                                         </StackPanel>
                                                     </DataTemplate>
@@ -911,7 +907,7 @@
                                                 <DataGridTemplateColumn.CellTemplate>
                                                     <DataTemplate>
                                                         <StackPanel Orientation="Horizontal">
-                                                            <Button Style="{StaticResource GridShowButton}" ToolTip="Create Document To Customer">
+                                                            <Button Tag="{Binding}" Style="{StaticResource GridShowButton}" ToolTip="Create Document To Customer" Click="AddCustomerToInvoice_Click">
                                                                 <Image Source="Assets\InvoiceIcon.png" Style="{StaticResource GridImageIcon}"/>
                                                             </Button>
                                                         </StackPanel>
@@ -921,6 +917,20 @@
                                         </DataGrid.Columns>
                                     </DataGrid>
                                 </Grid>
+                            </StackPanel>
+                            
+                            <!--App Settings-->
+                            <StackPanel x:Name="AppSettingsPop" Grid.Row="0" Visibility="Hidden" Orientation="Vertical" Width="500" Height="350" Background="White">
+                                <TextBlock Text="API secrets:" HorizontalAlignment="Center" Margin="0 5 0 5" FontSize="20" FontWeight="Bold" Style="{StaticResource TextBlockStyle}"/>
+
+                                <TextBlock Text="User Name :" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 5 5 5" FontSize="13" FontWeight="SemiBold" Style="{StaticResource TextBlockStyle}"/>
+                                <TextBox x:Name="ApiUserName" Margin="10 5 5 5" Style="{StaticResource TextBoxFilterBar}"/>
+                                <TextBlock Text="Password :" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 5 5 5" FontSize="13" FontWeight="SemiBold" Style="{StaticResource TextBlockStyle}"/>
+                                <TextBox x:Name="ApiPassword" Margin="10 5 5 5" Style="{StaticResource TextBoxFilterBar}"/>
+                                <TextBlock Text="Terminal Number :" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 5 5 5" FontSize="13" FontWeight="SemiBold" Style="{StaticResource TextBlockStyle}"/>
+                                <TextBox x:Name="ApiTerminalNumber" Margin="10 5 5 5" Style="{StaticResource TextBoxFilterBar}" />
+                                <Separator Height="1" Background="#dae2ea" Margin="0 3 0 10"/>
+                                <Button x:Name="SetGlobalApiSecrets" Content="Save Settings" HorizontalAlignment="Center" IsEnabled="True" Style="{StaticResource WideButton}" Click="SetGlobalApiSecrets_Click"/>
                             </StackPanel>
                         </Grid>
                     </Border>

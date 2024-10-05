@@ -1,7 +1,7 @@
-﻿using FinalProjectWPF.Projects.DontDropTheMillion.Models;
+﻿using FinalProjectWPF.Enums;
+using FinalProjectWPF.Projects.DontDropTheMillion.Models;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using System.Windows.Threading;
 
 namespace FinalProjectWPF.Projects.DontDropTheMillion
@@ -19,6 +19,10 @@ namespace FinalProjectWPF.Projects.DontDropTheMillion
         private TriviaQuestion? _currentQuestion;
         private static Random _random = new Random();
         private int CountOfQuestions = 0;
+        private DispatcherTimer _betTimer;
+        private bool _isBettingUp = false;
+        private bool _isBettingDown = false;
+        private int _currentAnswerIndex;
         private Dictionary<string, int> _currentBets = new Dictionary<string, int>()
         {
             { "Answer0", 0 },
@@ -32,6 +36,7 @@ namespace FinalProjectWPF.Projects.DontDropTheMillion
             InitializeComponent();
             LoadCatagories();
             SetupTimer();
+            SetupBetTimer(); // New method to set up the betting timer
         }
         public void LoadCatagories()
         {
@@ -39,7 +44,6 @@ namespace FinalProjectWPF.Projects.DontDropTheMillion
             QuestionNum.Content = CountOfQuestions;
             Timer.Visibility = Visibility.Hidden;
             TimerText.Visibility = Visibility.Hidden;
-
             var (cat1, cat2) = GetTwoRandomCategories();
             Catagory1.Content = cat1.ToString();
             Catagory2.Content = cat2.ToString();
@@ -48,9 +52,9 @@ namespace FinalProjectWPF.Projects.DontDropTheMillion
             Catagory2.Visibility = Visibility.Visible;
         }
 
-
         public async Task LoadQuestionForCatagory(TriviaCategory catagory)
         {
+            // Hide categories and show question fields
             Timer.Visibility = Visibility.Visible;
             TimerText.Visibility = Visibility.Visible;
             Catagory1.Visibility = Visibility.Hidden;
@@ -75,14 +79,13 @@ namespace FinalProjectWPF.Projects.DontDropTheMillion
             A3Up.Visibility = Visibility.Visible;
             A4Up.Visibility = Visibility.Visible;
 
-
             _currentQuestion = await _questionManager.GetQuestionsAsync(GetGameLevel(), catagory);
             QuestionLabel.Content = _currentQuestion.QuestionText;
 
-            Answer0.Content = _currentQuestion.AllAnswers[0];
-            Answer1.Content = _currentQuestion.AllAnswers[1];
-            Answer2.Content = _currentQuestion.AllAnswers[2];
-            Answer3.Content = _currentQuestion.AllAnswers[3];
+            Answer0.Text = _currentQuestion.AllAnswers[0];
+            Answer1.Text = _currentQuestion.AllAnswers[1];
+            Answer2.Text = _currentQuestion.AllAnswers[2];
+            Answer3.Text = _currentQuestion.AllAnswers[3];
 
             StartTimer();
             TheRightAnswer.Content = _currentQuestion.CorrectAnswer;
@@ -127,52 +130,44 @@ namespace FinalProjectWPF.Projects.DontDropTheMillion
                 }
                 else
                 {
-                    //await Task.Delay(500);
-                    //string recName = $"A{i}Rec";
-                    //Rectangle? r = mainGrid.Children.OfType<Rectangle>().Where(r => r.Name == recName).FirstOrDefault();
-                    //if (r != null)
-                    //{
-                    //    r.Fill = new SolidColorBrush(Colors.Red);
-                    //}
+                    await Task.Delay(500);
+                    string imgName = $"A{i}Img";
+                    string gridName = $"A{i}Grid";
+                    string mainGridName = $"A{i}MainGrid";
+                    Grid? mg = mainGrid.Children.OfType<Grid>().Where(r => r.Name == mainGridName).FirstOrDefault();
+                    Grid? g = mg.Children.OfType<Grid>().Where(r => r.Name == gridName).FirstOrDefault();
+                    Image? m = g.Children.OfType<Image>().Where(im => im.Name == imgName).FirstOrDefault();
+                    if (m != null)
+                    {
+                        m.Visibility = Visibility.Visible;
+                    }
                 }
             }
             await Task.Delay(500);
-
             switch (CorrectIndex)
             {
                 case 0:
-                    Answer0.Foreground = new SolidColorBrush(Colors.LightGreen);
+                    Answer0.Text = "correct answer";
                     break;
                 case 1:
-                    Answer1.Foreground = new SolidColorBrush(Colors.LightGreen);
+                    Answer1.Text = "correct answer";
                     break;
                 case 2:
-                    Answer2.Foreground = new SolidColorBrush(Colors.LightGreen);
+                    Answer2.Text = "correct answer";
                     break;
                 case 3:
-                    Answer3.Foreground = new SolidColorBrush(Colors.LightGreen);
+                    Answer3.Text = "correct answer";
                     break;
             }
 
             await Task.Delay(2000);
-
-            Answer0.Foreground = new SolidColorBrush(Colors.Transparent);
-            Answer1.Foreground = new SolidColorBrush(Colors.Transparent);
-            Answer2.Foreground = new SolidColorBrush(Colors.Transparent);
-            Answer3.Foreground = new SolidColorBrush(Colors.Transparent);
+            A0Img.Visibility = Visibility.Hidden;
+            A1Img.Visibility = Visibility.Hidden;
+            A2Img.Visibility = Visibility.Hidden;
+            A3Img.Visibility = Visibility.Hidden;
 
         }
 
-        //    private void EndGame()
-        //    {
-        //        MessageBox.Show($"Game over! You finished with ${_gameManager.TotalMoney}.", "Game Over", MessageBoxButton.OK, MessageBoxImage.Information);
-        //    }
-
-
-        // Handle decreasing the bet amount
-
-
-        // Submits the current bets and calculates the remaining money
         public async Task SubmitAnswers()
         {
             _timer.Stop();
@@ -197,12 +192,13 @@ namespace FinalProjectWPF.Projects.DontDropTheMillion
             if (_gameManager.IsGameOver())
             {
                 MessageBox.Show("Game Over! You lost all the money.");
-
+                ResetGameButton.Visibility = Visibility.Visible;
             }
             else if (_currentQuestionIndex >= 10)
             {
                 MessageBox.Show("Congratulations! You won the game.");
-
+                ((App)Application.Current).LastGameScore = (remainingMoney, GameType.DontDropTheMillion);
+                ResetGameButton.Visibility = Visibility.Visible;
             }
             else
             {
@@ -226,6 +222,7 @@ namespace FinalProjectWPF.Projects.DontDropTheMillion
                 LoadCatagories();
             }
         }
+
 
         private void SetupTimer()
         {
@@ -251,9 +248,9 @@ namespace FinalProjectWPF.Projects.DontDropTheMillion
             if (_timeRemaining <= 0)
             {
                 _timer.Stop();
-                MessageBox.Show("Time's up! money will be spread radomally between answers");
-                if (_gameManager.TotalMoney != 0)
+                if (UserMoney.Content.ToString() != "0")
                 {
+                    MessageBox.Show("Time's up! money will be spread radomally between answers");
                     int j = _gameManager.TotalMoney;
                     for (int i = 0; i <= j; i += 20000)
                     {
@@ -261,6 +258,25 @@ namespace FinalProjectWPF.Projects.DontDropTheMillion
                     }
                 }
                 await SubmitAnswers();
+            }
+        }
+
+        private void SetupBetTimer()
+        {
+            _betTimer = new DispatcherTimer();
+            _betTimer.Interval = TimeSpan.FromMilliseconds(50); // Example interval
+            _betTimer.Tick += BetTimer_Tick;
+        }
+
+        private void BetTimer_Tick(object sender, EventArgs e)
+        {
+            if (_isBettingUp)
+            {
+                IncreaseBetAmount("Answer" + _currentAnswerIndex); // Replace with your actual logic
+            }
+            else if (_isBettingDown)
+            {
+                DecreaseBetAmount("Answer" + _currentAnswerIndex); // Replace with your actual logic
             }
         }
 
@@ -290,6 +306,7 @@ namespace FinalProjectWPF.Projects.DontDropTheMillion
             A3Up.IsEnabled = true;
             A4Up.IsEnabled = true;
             SubmitQuestion.Visibility = Visibility.Hidden;
+
         }
 
         private string GetGameLevel()
@@ -319,45 +336,52 @@ namespace FinalProjectWPF.Projects.DontDropTheMillion
         {
             await LoadQuestionForCatagory((TriviaCategory)Enum.Parse(typeof(TriviaCategory), Catagory2.Content.ToString()));
         }
-        private void A1Up_Click(object sender, RoutedEventArgs e)
+
+        private void HandleBetMouseDown(int answerIndex, bool isBettingUp)
         {
-            IncreaseBetAmount("Answer0");
+            _currentAnswerIndex = answerIndex;
+            _isBettingUp = isBettingUp;
+            _isBettingDown = !isBettingUp;
+            _betTimer.Start();
         }
-        private void A1Down_Click(object sender, RoutedEventArgs e)
+
+        private void HandleBetMouseUp()
         {
-            DecreaseBetAmount("Answer0");
+            _isBettingUp = false;
+            _isBettingDown = false;
+            _betTimer.Stop();
         }
-        private void A2Up_Click(object sender, RoutedEventArgs e)
-        {
-            IncreaseBetAmount("Answer1");
-        }
-        private void A2Down_Click(object sender, RoutedEventArgs e)
-        {
-            DecreaseBetAmount("Answer1");
-        }
-        private void A3Up_Click(object sender, RoutedEventArgs e)
-        {
-            IncreaseBetAmount("Answer2");
-        }
-        private void A3Down_Click(object sender, RoutedEventArgs e)
-        {
-            DecreaseBetAmount("Answer2");
-        }
-        private void A4Up_Click(object sender, RoutedEventArgs e)
-        {
-            IncreaseBetAmount("Answer3");
-        }
-        private void A4Down_Click(object sender, RoutedEventArgs e)
-        {
-            DecreaseBetAmount("Answer3");
-        }
+        private void A1Up_MouseDown(object sender, RoutedEventArgs e) => HandleBetMouseDown(0, true);
+        private void A1Up_MouseUp(object sender, RoutedEventArgs e) => HandleBetMouseUp();
+        private void A1Down_MouseDown(object sender, RoutedEventArgs e) => HandleBetMouseDown(0, false);
+        private void A1Down_MouseUp(object sender, RoutedEventArgs e) => HandleBetMouseUp();
+
+        private void A2Up_MouseDown(object sender, RoutedEventArgs e) => HandleBetMouseDown(1, true);
+        private void A2Up_MouseUp(object sender, RoutedEventArgs e) => HandleBetMouseUp();
+        private void A2Down_MouseDown(object sender, RoutedEventArgs e) => HandleBetMouseDown(1, false);
+        private void A2Down_MouseUp(object sender, RoutedEventArgs e) => HandleBetMouseUp();
+
+        private void A3Up_MouseDown(object sender, RoutedEventArgs e) => HandleBetMouseDown(2, true);
+        private void A3Up_MouseUp(object sender, RoutedEventArgs e) => HandleBetMouseUp();
+        private void A3Down_MouseDown(object sender, RoutedEventArgs e) => HandleBetMouseDown(2, false);
+        private void A3Down_MouseUp(object sender, RoutedEventArgs e) => HandleBetMouseUp();
+
+        private void A4Up_MouseDown(object sender, RoutedEventArgs e) => HandleBetMouseDown(3, true);
+        private void A4Up_MouseUp(object sender, RoutedEventArgs e) => HandleBetMouseUp();
+        private void A4Down_MouseDown(object sender, RoutedEventArgs e) => HandleBetMouseDown(3, false);
+        private void A4Down_MouseUp(object sender, RoutedEventArgs e) => HandleBetMouseUp();
         private async void SubmitAnswer(object sender, RoutedEventArgs e)
         {
             await SubmitAnswers();
         }
+        private void ResetGame(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new DontDropTheMillion());
+        }
         private void GoBack_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.GoBack();
+            _timer.Stop();
+            NavigationService.Navigate(new DontDropTheMillionPreviewPage());
         }
     }
 }
