@@ -39,6 +39,7 @@
     <None Remove="Projects\CatchTheEgg\Accets\Background1.jpg" />
     <None Remove="Projects\CatchTheEgg\Accets\Basket.png" />
     <None Remove="Projects\CatchTheEgg\Accets\BrokenEgg.png" />
+    <None Remove="Projects\CatchTheEgg\Accets\CatchTheEggVideo.mp4" />
     <None Remove="Projects\CatchTheEgg\Accets\Egg.png" />
     <None Remove="Projects\CatchTheEgg\Accets\ExitIcon.png" />
     <None Remove="Projects\CatchTheEgg\Accets\FreezEgg.png" />
@@ -57,6 +58,7 @@
     <None Remove="Projects\DontDropTheMillion\Assets\Background.jpg" />
     <None Remove="Projects\DontDropTheMillion\Assets\CorrectIcon.png" />
     <None Remove="Projects\DontDropTheMillion\Assets\Decrease.png" />
+    <None Remove="Projects\DontDropTheMillion\Assets\DropTheMillionVideo.mp4" />
     <None Remove="Projects\DontDropTheMillion\Assets\ExitIcon.png" />
     <None Remove="Projects\DontDropTheMillion\Assets\Increase.png" />
     <None Remove="Projects\DontDropTheMillion\Assets\QuestionBlock.png" />
@@ -64,12 +66,14 @@
     <None Remove="Projects\MyCalender\Assets\AddTaskIcon.png" />
     <None Remove="Projects\MyCalender\Assets\ArrowBackIcon.png" />
     <None Remove="Projects\MyCalender\Assets\ArrowNextIcon.png" />
+    <None Remove="Projects\MyCalender\Assets\CalendarVideo.mp4" />
     <None Remove="Projects\MyCalender\Assets\ClockIcon.png" />
     <None Remove="Projects\MyCalender\Assets\EditIcon.png" />
     <None Remove="Projects\MyCalender\Assets\ExitIcon.png" />
     <None Remove="Projects\MyCalender\Assets\Info_icon.svg.png" />
     <None Remove="Projects\MyCalender\Assets\InvoiceIcon.png" />
     <None Remove="Projects\MyCalender\Assets\ItemTaskIcon.png" />
+    <None Remove="Projects\MyCalender\Assets\MyCalendarVideo.mp4" />
     <None Remove="Projects\MyCalender\Assets\TasksIcon.png" />
     <None Remove="Projects\MyLittleBusiness\Assets\AddLineIcon.png" />
     <None Remove="Projects\MyLittleBusiness\Assets\american_express.gif" />
@@ -88,7 +92,9 @@
     <None Remove="Projects\MyLittleBusiness\Assets\Info_icon.svg.png" />
     <None Remove="Projects\MyLittleBusiness\Assets\InvoiceIcon.png" />
     <None Remove="Projects\MyLittleBusiness\Assets\isracard.gif" />
+    <None Remove="Projects\MyLittleBusiness\Assets\LittleBusinessVideo.mp4" />
     <None Remove="Projects\MyLittleBusiness\Assets\mastercard.gif" />
+    <None Remove="Projects\MyLittleBusiness\Assets\MyLittleBusinessVideo.mp4" />
     <None Remove="Projects\MyLittleBusiness\Assets\PCI DSS.png" />
     <None Remove="Projects\MyLittleBusiness\Assets\pciLogo.png" />
     <None Remove="Projects\MyLittleBusiness\Assets\PurpleLogoSmall.png" />
@@ -101,12 +107,15 @@
     <None Remove="Projects\Snake\Accets\background.png" />
     <None Remove="Projects\Snake\Accets\body.png" />
     <None Remove="Projects\Snake\Accets\ExitIcon.png" />
+    <None Remove="Projects\Snake\Accets\SnakeGameVideo.mp4" />
+    <None Remove="Projects\Snake\Accets\SnakeVideo.mp4" />
     <None Remove="Projects\Snake\Accets\snake_head_down.png" />
     <None Remove="Projects\Snake\Accets\snake_head_left.png" />
     <None Remove="Projects\Snake\Accets\snake_head_right.png" />
     <None Remove="Projects\Snake\Accets\snake_head_up.png" />
     <None Remove="Projects\TicTacToe\Assets\Background.jpg" />
     <None Remove="Projects\TicTacToe\Assets\ExitIcon.png" />
+    <None Remove="Projects\TicTacToe\Assets\TicTacToeVideo.mp4" />
   </ItemGroup>
 
   <ItemGroup>
@@ -117,10 +126,22 @@
     <Content Include="Assets\GameCenterBackground.mp4">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Projects\CatchTheEgg\Accets\GamebbbCenterBackground.mp4">
+    <Content Include="Projects\CatchTheEgg\Accets\CatchTheEggVideo.mp4">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Projects\CatchTheEgg\Accets\TempCTEbackground.mp4">
+    <Content Include="Projects\DontDropTheMillion\Assets\DropTheMillionVideo.mp4">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Projects\MyCalender\Assets\CalendarVideo.mp4">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Projects\MyLittleBusiness\Assets\LittleBusinessVideo.mp4">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Projects\Snake\Accets\SnakeVideo.mp4">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Projects\TicTacToe\Assets\TicTacToeVideo.mp4">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

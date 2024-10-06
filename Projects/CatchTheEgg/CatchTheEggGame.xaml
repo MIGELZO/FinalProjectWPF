@@ -18,7 +18,7 @@
                 <Image Source="Accets\ExitIcon.png" Style="{StaticResource MenuButtonIcon}"/>
             </Button>
             <Label Name="ScoreText" FontSize="30" Canvas.Left="105" Canvas.Top="45" Foreground="AliceBlue" Style="{StaticResource TitleLabelStyle}">Score: 0</Label>
-            <Label Name="Hearts" FontSize="20" Canvas.Left="537" Canvas.Top="45" HorizontalAlignment="Left" VerticalAlignment="Center">Hearts: 5</Label>
+            <Label Name="Hearts" FontSize="30" Canvas.Left="600" Canvas.Top="45" HorizontalAlignment="Left" VerticalAlignment="Center"  Foreground="AliceBlue" Style="{StaticResource TitleLabelStyle}">Hearts: 5</Label>
 
             <Rectangle Name="Basket" Width="{Binding Size}" Height="80" Fill="Orange" Canvas.Left="295" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         </Canvas>

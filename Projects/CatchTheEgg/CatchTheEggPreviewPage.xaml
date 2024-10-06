@@ -23,18 +23,18 @@
         </Grid.ColumnDefinitions>
 
         <MediaElement Name="Gif1Background" 
-              Source="/Assets/TempCTEbackground.mp4"
+              Source="Projects\CatchTheEgg\Accets\CatchTheEggVideo.mp4"
               LoadedBehavior="Play"
               UnloadedBehavior="Manual"
               MediaEnded="BackgroundMedia_MediaEnded"
               Stretch="Fill"
               IsHitTestVisible="False"
               Grid.ColumnSpan="10" Grid.RowSpan="10"/>
-
-        <Label x:Name="TitleLabel" Content="Catch the Egg" Margin="0 50 0 0" Grid.Row="0" HorizontalAlignment="Center" Style="{StaticResource TitleLabelStyle}" />
+    
+        <Label x:Name="TitleLabel" Content="Catch the Egg" Margin="0 50 0 0" Grid.Row="0" HorizontalAlignment="Center" Foreground="Black" Style="{StaticResource TitleLabelStyle}" />
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 10">
-            <TextBlock Text="About the game" Foreground="#FFCEC9C9" VerticalAlignment="Center" FontSize="30" Width="230"/>
+            <TextBlock Text="About the game" Foreground="Black" VerticalAlignment="Center" FontSize="30" Width="230"/>
             <Button ToolTip="About the game" Style="{StaticResource TopButton}" Height="30" Background="#56e9a5" Click="Button_ClickGameInfo">
                 <Image Source="\Assets\InfoIcon.png" Width="15" Height="15" />
             </Button>
