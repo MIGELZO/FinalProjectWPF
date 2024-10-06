@@ -23,6 +23,7 @@ namespace FinalProjectWPF.Projects.MyCalendar
             InitializeTasksForDate(_currentDay);
             UpdateYearMonth(_currentDay);
 
+
         }
 
         private async Task InitializeTasksForDate(DateTime SelectedDate)
@@ -38,7 +39,8 @@ namespace FinalProjectWPF.Projects.MyCalendar
                     count++;
                     DateTime taskStartTime = task.TaskStartTime;
                     DateTime taskEndTime = task.TaskEndTime;
-                    string taskTime = "From: " + taskStartTime.ToShortTimeString() + " - " + "Till: " + taskEndTime.ToShortTimeString(); var taskControl = new Item
+                    string taskTime = "From: " + taskStartTime.ToShortTimeString() + " - " + "Till: " + taskEndTime.ToShortTimeString();
+                    var taskControl = new Item
                     {
                         Title = task.Title,
                         Time = taskTime,
@@ -238,8 +240,11 @@ namespace FinalProjectWPF.Projects.MyCalendar
                 }
             }
 
-            // Set the selected end time
             string endHour = task.TaskEndTime.ToString("HH:mm");
+            if (endHour == "23:59")
+            {
+                endHour = "23:00";
+            }
             foreach (ComboBoxItem item in TaskEndTimeComboBox.Items)
             {
                 if (item.Tag.ToString() == endHour)

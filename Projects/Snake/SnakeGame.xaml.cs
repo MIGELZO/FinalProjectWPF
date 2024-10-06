@@ -19,7 +19,9 @@ namespace FinalProjectWPF.Projects.Snake
         {
             InitializeComponent();
             InitializeGame();
+            GameGrid.KeyDown += MainWindow_KeyDown;
         }
+
 
         private void InitializeGame()
         {
@@ -31,10 +33,9 @@ namespace FinalProjectWPF.Projects.Snake
             gameTimer.Interval = TimeSpan.FromMilliseconds(150);
             gameTimer.Start();
 
-            GameGrid.Focusable = true;
-            GameGrid.Focus();
-            GameGrid.KeyDown += MainWindow_KeyDown;
         }
+
+
 
         private void InitializeGameGrid()
         {
@@ -48,6 +49,7 @@ namespace FinalProjectWPF.Projects.Snake
             }
         }
 
+        // modify
         private void GameTimer_Tick(object sender, EventArgs e)
         {
             game.Update();
@@ -59,6 +61,8 @@ namespace FinalProjectWPF.Projects.Snake
                 GameOverOverlay.Visibility = Visibility.Visible;
             }
         }
+
+
 
         private void MainWindow_KeyDown(object sender, KeyEventArgs e)
         {
@@ -93,7 +97,11 @@ namespace FinalProjectWPF.Projects.Snake
             GameGrid.Focus();
         }
 
-        private void ResetButton_Click(object sender, EventArgs e)
+
+
+
+
+        private void ResetButton_Click(object sender, RoutedEventArgs e)
         {
             game.ResetGame();
             GameOverOverlay.Visibility = Visibility.Collapsed;
@@ -101,8 +109,11 @@ namespace FinalProjectWPF.Projects.Snake
             UpdateUI();
         }
 
+
         private void GoBack_Click(object sender, RoutedEventArgs e)
         {
+            game.ResetGame();
+            gameTimer.Stop();
             NavigationService.Navigate(new SnakePreviewPage());
         }
     }

@@ -29,7 +29,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <Border HorizontalAlignment="Left" ToolTip="Home Pase" Margin="20 58 0 35"/>
+                    <Border HorizontalAlignment="Left" ToolTip="Home Pase" Margin="20 50 0 35"/>
 
                     <Border Grid.Row="1" Background="#623ed0" CornerRadius="0 50 0 30">
                         <DockPanel>
@@ -37,7 +37,7 @@
                         DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="20 -50 0 0">
                                 <Ellipse>
                                     <Ellipse.Fill>
-                                        <ImageBrush ImageSource="Assets\PurpleLogoSmall.png"/>
+                                        <ImageBrush ImageSource="Assets\PurpleLogoSmall.png" />
                                     </Ellipse.Fill>
                                 </Ellipse>
                             </Border>
@@ -681,7 +681,7 @@
                         <!--Documents Table-->
 
                         <Grid x:Name="DocumentsTable" Visibility="Visible" Grid.Row="1" Style="{StaticResource HiddenStyle}">
-                            <DataGrid x:Name="DocumentsData" Height="750" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.CanContentScroll="True">
+                            <DataGrid x:Name="DocumentsData" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Hidden" Height="750">
                                 <DataGrid.Columns>
 
                                     <DataGridTextColumn Header="Invoice Number" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding InvoiceID}"/>
@@ -696,9 +696,6 @@
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal">
-                                                    <!--<Button x:Name="DocShowButton" Visibility="Visible" Style="{StaticResource GridShowButton}" ToolTip="Show Document">
-                                                    <Image Source="Assets\ShowIcon.png" Style="{StaticResource GridImageIcon}"/>
-                                                </Button>-->
                                                     <Button x:Name="DocDownButton" Tag="{Binding}" Style="{StaticResource GridShowButton}" Margin="10 0 0 0" ToolTip="Download Document" Click="DocDownButton_Click">
                                                         <Image Source="Assets\DownloadIcon.png" Style="{StaticResource GridImageIcon}"/>
                                                     </Button>
@@ -739,7 +736,7 @@
                             <Button ToolTip="New Product" Grid.Row="0" Style="{StaticResource TopButton}" VerticalAlignment="Top" HorizontalAlignment="Left" Click="Button_ClickCreateNewItem">
                                 <Image Source="Assets\AddLineIcon.png" Width="15" Height="15" />
                             </Button>
-                            <DataGrid x:Name="ItemsData" Grid.Row="1" Height="700" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.CanContentScroll="True">
+                            <DataGrid x:Name="ItemsData" Grid.Row="1" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Hidden" Height="750">
                                 <DataGrid.Columns>
 
                                     <DataGridTextColumn Header="Item ID" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding ItemId}"/>
@@ -767,7 +764,7 @@
                         <!--Customers Table-->
 
                         <Grid x:Name="CustomersTable" Grid.Row="1" Style="{StaticResource HiddenStyle}">
-                            <DataGrid x:Name="CustomersData" Height="700" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.CanContentScroll="True">
+                            <DataGrid x:Name="CustomersData" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Hidden" Height="750">
                                 <DataGrid.Columns>
 
                                     <DataGridTextColumn Header="Customer ID" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding CustomerID}"/>
@@ -902,7 +899,7 @@
                                     </DataGrid>
                                 </Grid>
                             </StackPanel>
-                            
+
                             <!--App Settings-->
                             <StackPanel x:Name="AppSettingsPop" Grid.Row="0" Visibility="Hidden" Orientation="Vertical" Width="500" Height="350" Background="White">
                                 <TextBlock Text="API secrets:" HorizontalAlignment="Center" Margin="0 5 0 5" FontSize="20" FontWeight="Bold" Style="{StaticResource TextBlockStyle}"/>

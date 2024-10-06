@@ -32,17 +32,6 @@ namespace FinalProjectWPF.Projects.TicTacToe
         {
             InitializeComponent();
             _buttons = new Button[] { button1, button2, button3, button4, button5, button6, button7, button8, button9 };
-            if (_player == 1)
-            {
-                if (_gameLevel == 2)
-                {
-                    ComputerPlayHard();
-                }
-                else
-                {
-                    ComputerPlayEasy();
-                }
-            }
         }
 
         private async Task ComputerPlayEasy()
@@ -71,6 +60,7 @@ namespace FinalProjectWPF.Projects.TicTacToe
                 WinnerDisplay.Content = "it's a tie";
             };
             ToggleButtons(true);
+
         }
 
         private async Task ComputerPlayHard()
@@ -246,6 +236,7 @@ namespace FinalProjectWPF.Projects.TicTacToe
                 }
             }
         }
+
         private void ToggleButtons(bool isEnabled)
         {
             foreach (Button button in _buttons)
@@ -318,6 +309,7 @@ namespace FinalProjectWPF.Projects.TicTacToe
             P2score.Content = "0";
             _P1score = 0;
             P1score.Content = "0";
+
         }
 
         private void radioButton_Checked(object sender, RoutedEventArgs e)
@@ -403,6 +395,11 @@ namespace FinalProjectWPF.Projects.TicTacToe
                     await ComputerPlayEasy();
                 }
             }
+        }
+
+        private void GoBackButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new TicTacToePreviewPage());
         }
     }
 }

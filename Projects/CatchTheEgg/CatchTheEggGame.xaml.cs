@@ -17,7 +17,6 @@ namespace FinalProjectWPF.Projects.CatchTheEgg
         ImageBrush backgroundImage = new ImageBrush();
         Random rand = new Random();
 
-
         public CatchTheEggGame()
         {
             InitializeComponent();
@@ -25,24 +24,21 @@ namespace FinalProjectWPF.Projects.CatchTheEgg
 
             SizeChanged += MainWindow_SizeChanged;
         }
-
         private void InitializeGameAndScreen()
         {
             MyCanvas.Focus();
 
             basket.ImageSource = new BitmapImage(new Uri("../../../Projects/CatchTheEgg/Accets/Basket.png", UriKind.Relative));
-
             Basket.Fill = basket;
             MyCanvas.Background = backgroundImage;
+
             gameManager = new GameManager(MyCanvas, new Basket(Canvas.GetLeft(Basket), Basket.Width));
             DataContext = gameManager.PlayerBasket;
-
 
             GameTimer.Tick += GameEngine;
             GameTimer.Interval = TimeSpan.FromMilliseconds(30);
             GameTimer.Start();
         }
-
         private void GameEngine(object sender, EventArgs e)
         {
             ScoreText.Content = "Score: " + gameManager.Score;
@@ -84,16 +80,19 @@ namespace FinalProjectWPF.Projects.CatchTheEgg
             Canvas.SetLeft(Basket, pX - 40);
             gameManager.PlayerBasket.Position = pX - 40;
         }
-
         private void MainWindow_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             double newWidth = MyCanvas.ActualWidth;
             double newHeight = MyCanvas.ActualHeight;
             gameManager.PlayerBasket.Size = newWidth * 0.1;
             gameManager.PlayerBasket.Size = newHeight * 0.1;
+
         }
+
         private void GoBack_Click(object sender, RoutedEventArgs e)
         {
+            ResetGame();
+            GameTimer.Stop();
             NavigationService.Navigate(new CatchTheEggPreviewPage());
         }
     }

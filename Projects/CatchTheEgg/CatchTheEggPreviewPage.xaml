@@ -22,19 +22,17 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <MediaElement Name="Gif1Background"
-              Source="Accets/GamebbbCenterBackground.mp4"
+        <MediaElement Name="Gif1Background" 
+              Source="/Assets/TempCTEbackground.mp4"
               LoadedBehavior="Play"
               UnloadedBehavior="Manual"
               MediaEnded="BackgroundMedia_MediaEnded"
-                      MediaFailed="MediaElement_MediaFailed"
-              MediaOpened="MediaElement_MediaOpened"
               Stretch="Fill"
               IsHitTestVisible="False"
               Grid.ColumnSpan="10" Grid.RowSpan="10"/>
 
         <Label x:Name="TitleLabel" Content="Catch the Egg" Margin="0 50 0 0" Grid.Row="0" HorizontalAlignment="Center" Style="{StaticResource TitleLabelStyle}" />
-        
+
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 0 0 10">
             <TextBlock Text="About the game" Foreground="#FFCEC9C9" VerticalAlignment="Center" FontSize="30" Width="230"/>
             <Button ToolTip="About the game" Style="{StaticResource TopButton}" Height="30" Background="#56e9a5" Click="Button_ClickGameInfo">
@@ -44,19 +42,19 @@
 
         <Border CornerRadius="30" BorderThickness="2" VerticalAlignment="Top" Grid.Row="2" Width="500" BorderBrush="#56e9a5" ClipToBounds="True" Padding="10" Background="#56e9a5" Opacity="0.8">
             <StackPanel x:Name="ScoreBoardPanel" Orientation="Vertical" Background="#56e9a5" Height="500">
-            <TextBlock Text="Scoreboard :" HorizontalAlignment="Center" Margin="0 5 0 5" FontSize="20" FontWeight="Bold" Style="{StaticResource TextBlockStyle}"/>
-            <Grid>
-                <DataGrid x:Name="ScoreBoard" Height="380" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"
+                <TextBlock Text="Scoreboard :" HorizontalAlignment="Center" Margin="0 5 0 5" FontSize="20" FontWeight="Bold" Style="{StaticResource TextBlockStyle}"/>
+                <Grid>
+                    <DataGrid x:Name="ScoreBoard" Height="380" Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}"
                   ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" RowStyle="{DynamicResource DataGridRowStyle1}" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.CanContentScroll="True">
-                    <DataGrid.Columns>
+                        <DataGrid.Columns>
 
-                        <DataGridTextColumn Header="Player Name" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding Name}"/>
-                        <DataGridTextColumn Header="score" IsReadOnly="True" Width="*" Binding="{Binding Score}"/>
+                            <DataGridTextColumn Header="Player Name" IsReadOnly="True" CanUserResize="False" Width="*" Binding="{Binding Name}"/>
+                            <DataGridTextColumn Header="score" IsReadOnly="True" Width="*" Binding="{Binding Score}"/>
 
-                    </DataGrid.Columns>
-                </DataGrid>
-            </Grid>
-        </StackPanel>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </StackPanel>
         </Border>
 
         <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center">
@@ -73,8 +71,8 @@
                     <StackPanel x:Name="About" Grid.Row="0" Orientation="Vertical" Width="500" Height="300" Background="White">
                         <TextBlock Text="Game rules and tech" HorizontalAlignment="Center" Margin="0 5 0 5" FontSize="20" FontWeight="Bold" Style="{StaticResource TextBlockStyle}"/>
                         <Separator Height="1" Background="#dae2ea" Margin="0 3 0 10"/>
-                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 5 5 5" FontSize="13" FontWeight="SemiBold" Style="{StaticResource TextBlockStyle}">
-                            lorem ipsum fndsujofjdnfjdnsfjndsjkfnkdjshflkjdsjkflnhoifhjaioj
+                        <TextBlock TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 5 5 5" FontSize="13" FontWeight="SemiBold" Style="{StaticResource TextBlockStyle}">
+                           In this WPF game, eggs fall from the top, and the player controls a basket to catch them. Special eggs grant abilities, while poop falls as a negative obstacle to avoid. Players must gather points by catching eggs, using special abilities to enhance gameplay, and avoiding penalties from missing or catching poop.
                         </TextBlock>
                     </StackPanel>
 

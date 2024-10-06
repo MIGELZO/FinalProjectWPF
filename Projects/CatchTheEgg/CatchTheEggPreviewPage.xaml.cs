@@ -20,8 +20,6 @@ namespace FinalProjectWPF.Projects.CatchTheEgg
         public CatchTheEggPreviewPage()
         {
             InitializeComponent();
-            string path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Accets", "TempCTEbackground.mp4");
-            Gif1Background.Source = new Uri(path);
 
             fm = (FileManager)((App)Application.Current).fmGlobal;
             LoggedInUser = ((App)Application.Current).LoggedInUserID;
@@ -34,17 +32,6 @@ namespace FinalProjectWPF.Projects.CatchTheEgg
         {
             Gif1Background.Position = TimeSpan.Zero;
             Gif1Background.Play();
-        }
-
-        private void MediaElement_MediaFailed(object sender, ExceptionRoutedEventArgs e)
-        {
-            MessageBox.Show("Media failed to load: " + e.ErrorException.Message);
-        }
-
-        private void MediaElement_MediaOpened(object sender, RoutedEventArgs e)
-        {
-            // Check if the media was loaded correctly
-            MessageBox.Show("Media loaded successfully");
         }
 
         private void GoBack_Click(object sender, RoutedEventArgs e)

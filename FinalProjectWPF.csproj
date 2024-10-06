@@ -105,6 +105,8 @@
     <None Remove="Projects\Snake\Accets\snake_head_left.png" />
     <None Remove="Projects\Snake\Accets\snake_head_right.png" />
     <None Remove="Projects\Snake\Accets\snake_head_up.png" />
+    <None Remove="Projects\TicTacToe\Assets\Background.jpg" />
+    <None Remove="Projects\TicTacToe\Assets\ExitIcon.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -148,7 +150,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Projects\TicTacToe\Assets\" />
     <Folder Include="Projects\TicTacToe\Models\" />
   </ItemGroup>
 
@@ -220,6 +221,8 @@
 
   <ItemGroup>
     <Resource Include="Projects\CatchTheEgg\Accets\heartsImg\2.0.png" />
+    <Resource Include="Projects\TicTacToe\Assets\Background.jpg" />
+    <Resource Include="Projects\TicTacToe\Assets\ExitIcon.png" />
   </ItemGroup>
 
 </Project>

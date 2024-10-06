@@ -306,6 +306,69 @@ namespace FinalProjectWPF.Projects.MyLittleBusiness
             }
         }
 
+        private void ButtonClick_PayMethods(object sender, RoutedEventArgs e)
+        {
+            RadioButton clickedButton = sender as RadioButton;
+            Style HiddenStyle = (Style)FindResource("HiddenStyle");
+            Style VisibleStyle = (Style)FindResource("VisibleStyle");
+
+            if (clickedButton != null)
+            {
+                switch (clickedButton.Name)
+                {
+                    case "cashBUT":
+                        {
+                            if (CashForm == null) { break; }
+
+                            CashForm.Style = VisibleStyle;
+                            CreditCaForm.Style = HiddenStyle;
+                            ChequeForm.Style = HiddenStyle;
+                            BankForm.Style = HiddenStyle;
+                            BitForm.Style = HiddenStyle;
+                            break;
+                        }
+                    case "CredBUT":
+                        {
+                            CreditCaForm.Style = VisibleStyle;
+                            CashForm.Style = HiddenStyle;
+                            ChequeForm.Style = HiddenStyle;
+                            BankForm.Style = HiddenStyle;
+                            BitForm.Style = HiddenStyle;
+                            break;
+                        }
+                    case "chequeBUT":
+                        {
+                            ChequeForm.Style = VisibleStyle;
+                            CashForm.Style = HiddenStyle;
+                            CreditCaForm.Style = HiddenStyle;
+                            BankForm.Style = HiddenStyle;
+                            BitForm.Style = HiddenStyle;
+                            break;
+                        }
+                    case "bankBUT":
+                        {
+                            BankForm.Style = VisibleStyle;
+                            CashForm.Style = HiddenStyle;
+                            CreditCaForm.Style = HiddenStyle;
+                            ChequeForm.Style = HiddenStyle;
+                            BitForm.Style = HiddenStyle;
+                            break;
+                        }
+                    case "bitBUT":
+                        {
+                            BitForm.Style = VisibleStyle;
+                            CashForm.Style = HiddenStyle;
+                            CreditCaForm.Style = HiddenStyle;
+                            ChequeForm.Style = HiddenStyle;
+                            BankForm.Style = HiddenStyle;
+                            break;
+                        }
+                }
+            }
+        }
+
+
+
         private void Button_Click_TabNav(object sender, RoutedEventArgs e)
         {
             RadioButton clickedButton = sender as RadioButton;
@@ -417,70 +480,10 @@ namespace FinalProjectWPF.Projects.MyLittleBusiness
             }
         }
 
-        private void ButtonClick_PayMethods(object sender, RoutedEventArgs e)
-        {
-            RadioButton clickedButton = sender as RadioButton;
-            Style HiddenStyle = (Style)FindResource("HiddenStyle");
-            Style VisibleStyle = (Style)FindResource("VisibleStyle");
-
-            if (clickedButton != null)
-            {
-                switch (clickedButton.Name)
-                {
-                    case "cashBUT":
-                        {
-                            if (CashForm == null) { break; }
-
-                            CashForm.Style = VisibleStyle;
-                            CreditCaForm.Style = HiddenStyle;
-                            ChequeForm.Style = HiddenStyle;
-                            BankForm.Style = HiddenStyle;
-                            BitForm.Style = HiddenStyle;
-                            break;
-                        }
-                    case "CredBUT":
-                        {
-                            CreditCaForm.Style = VisibleStyle;
-                            CashForm.Style = HiddenStyle;
-                            ChequeForm.Style = HiddenStyle;
-                            BankForm.Style = HiddenStyle;
-                            BitForm.Style = HiddenStyle;
-                            break;
-                        }
-                    case "chequeBUT":
-                        {
-                            ChequeForm.Style = VisibleStyle;
-                            CashForm.Style = HiddenStyle;
-                            CreditCaForm.Style = HiddenStyle;
-                            BankForm.Style = HiddenStyle;
-                            BitForm.Style = HiddenStyle;
-                            break;
-                        }
-                    case "bankBUT":
-                        {
-                            BankForm.Style = VisibleStyle;
-                            CashForm.Style = HiddenStyle;
-                            CreditCaForm.Style = HiddenStyle;
-                            ChequeForm.Style = HiddenStyle;
-                            BitForm.Style = HiddenStyle;
-                            break;
-                        }
-                    case "bitBUT":
-                        {
-                            BitForm.Style = VisibleStyle;
-                            CashForm.Style = HiddenStyle;
-                            CreditCaForm.Style = HiddenStyle;
-                            ChequeForm.Style = HiddenStyle;
-                            BankForm.Style = HiddenStyle;
-                            break;
-                        }
-                }
-            }
-        }
 
         private void RadioButton_ExitApp(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new MyLittleBusinessPreviewPage());
+            NavigationService.GoBack();
         }
 
         private void Button_ClickNewProductLine(object sender, RoutedEventArgs e)
@@ -507,7 +510,7 @@ namespace FinalProjectWPF.Projects.MyLittleBusiness
             Grid.SetRow(newProductLine, newRow);
 
             // Add the Button
-            Button deleteButton = new Button { HorizontalAlignment = HorizontalAlignment.Left, ToolTip = "Delete Line", Style = (Style)FindResource("TopButton") };
+            Button deleteButton = new Button { HorizontalAlignment = HorizontalAlignment.Left, Style = (Style)FindResource("TopButton") };
             deleteButton.Content = new Image { Source = new BitmapImage(new Uri("Assets/DeleteIcon.png", UriKind.Relative)), Width = 15, Height = 15 };
             deleteButton.Click += (sender, e) => DeleteProductLine(newProductLine); // Assign the event handler
             //Grid.SetColumn(deleteButton, 0);
@@ -591,7 +594,7 @@ namespace FinalProjectWPF.Projects.MyLittleBusiness
             Grid.SetRow(newChequeLine, newRow);
 
             // Add the Delete Button
-            Button deleteButton = new Button { HorizontalAlignment = HorizontalAlignment.Left, ToolTip = "Delete Line", Style = (Style)FindResource("TopButton") };
+            Button deleteButton = new Button { HorizontalAlignment = HorizontalAlignment.Left, Style = (Style)FindResource("TopButton") };
             deleteButton.Content = new Image { Source = new BitmapImage(new Uri("Assets/DeleteIcon.png", UriKind.Relative)), Width = 15, Height = 15 };
             deleteButton.Click += (sender, e) => DeleteChequeLine(newChequeLine); // Assign the event handler
             newChequeLine.Children.Add(deleteButton);
@@ -775,6 +778,14 @@ namespace FinalProjectWPF.Projects.MyLittleBusiness
         private void PaymentSumUpdated(object sender, TextChangedEventArgs e)
         {
             UpdateInvoiceBalance();
+        }
+
+        // reports **************************************************
+        // get the data related to other files in the reports (customerName => invoice report) 
+
+        public void CopyOrderToInvoice()
+        {
+
         }
 
         public void SendToEmail(object sender, RoutedEventArgs e)
@@ -1026,9 +1037,6 @@ namespace FinalProjectWPF.Projects.MyLittleBusiness
                 }
             }
         }
-
-
-
         private async void DocSendEmailButton_Click(object sender, RoutedEventArgs e)
         {
             Button clickedButton = sender as Button;
@@ -1067,6 +1075,7 @@ namespace FinalProjectWPF.Projects.MyLittleBusiness
 
         private void CreateNewItem_Click(object sender, RoutedEventArgs e)
         {
+
             Button clickedButton = sender as Button;
             int newID = FM.GetNextItemID();
 
@@ -1158,7 +1167,6 @@ namespace FinalProjectWPF.Projects.MyLittleBusiness
                 }
             }
         }
-
         public void CleanAllForms()
         {
             IcustomerName.Text = "";
@@ -1221,6 +1229,7 @@ namespace FinalProjectWPF.Projects.MyLittleBusiness
             GetItemPop.Visibility = Visibility.Hidden;
             GetCustomerPop.Visibility = Visibility.Visible;
             AppSettingsPop.Visibility = Visibility.Hidden;
+
         }
 
         private void Button_ClickGetItem(object sender, RoutedEventArgs e)
@@ -1231,6 +1240,7 @@ namespace FinalProjectWPF.Projects.MyLittleBusiness
             GetItemPop.Visibility = Visibility.Visible;
             GetCustomerPop.Visibility = Visibility.Hidden;
             AppSettingsPop.Visibility = Visibility.Hidden;
+
         }
         private void Button_ClickCreateNewItem(object sender, RoutedEventArgs e)
         {
@@ -1240,6 +1250,7 @@ namespace FinalProjectWPF.Projects.MyLittleBusiness
             GetItemPop.Visibility = Visibility.Hidden;
             GetCustomerPop.Visibility = Visibility.Hidden;
             AppSettingsPop.Visibility = Visibility.Hidden;
+
         }
         private void Button_ClickEditItem(object sender, RoutedEventArgs e)
         {
@@ -1258,6 +1269,8 @@ namespace FinalProjectWPF.Projects.MyLittleBusiness
             GetCustomerPop.Visibility = Visibility.Hidden;
             AppSettingsPop.Visibility = Visibility.Hidden;
         }
+
+        // modify
         private void Button_ClickAppSettings(object sender, RoutedEventArgs e)
         {
             Button clickedButton = sender as Button;
@@ -1269,6 +1282,7 @@ namespace FinalProjectWPF.Projects.MyLittleBusiness
             GetCustomerPop.Visibility = Visibility.Hidden;
             AppSettingsPop.Visibility = Visibility.Visible;
         }
+
         private void EditItemButton_Click(object sender, RoutedEventArgs e)
         {
             FM.UpdateItem(int.Parse(EditItemID.Text), EditItemDescription.Text, decimal.Parse(EditItemPrice.Text));

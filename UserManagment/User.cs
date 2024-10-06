@@ -29,7 +29,7 @@ namespace FinalProjectWPF.UserManagment
             {
                 return _userId;
             }
-            private set
+            set
             {
                 _userId = value;
             }
