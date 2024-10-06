@@ -42,6 +42,7 @@
     <None Remove="Projects\CatchTheEgg\Accets\Egg.png" />
     <None Remove="Projects\CatchTheEgg\Accets\ExitIcon.png" />
     <None Remove="Projects\CatchTheEgg\Accets\FreezEgg.png" />
+    <None Remove="Projects\CatchTheEgg\Accets\GamebbbCenterBackground.mp4" />
     <None Remove="Projects\CatchTheEgg\Accets\GoldenEgg.png" />
     <None Remove="Projects\CatchTheEgg\Accets\Heart.png" />
     <None Remove="Projects\CatchTheEgg\Accets\heartsImg\0.5.png" />
@@ -112,6 +113,9 @@
 
   <ItemGroup>
     <Content Include="Assets\GameCenterBackground.mp4">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Projects\CatchTheEgg\Accets\GamebbbCenterBackground.mp4">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Projects\CatchTheEgg\Accets\TempCTEbackground.mp4">

@@ -9,7 +9,7 @@
       Title="CatchTheEggPreviewPage">
 
 
-    <Grid Background="White">
+    <Grid Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -22,14 +22,16 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <MediaElement Name="GifBackground"
-              Source="\Projects\CatchTheEgg\Accets\TempCTEbackground.mp4"
+        <MediaElement Name="Gif1Background"
+              Source="Accets/GamebbbCenterBackground.mp4"
               LoadedBehavior="Play"
               UnloadedBehavior="Manual"
               MediaEnded="BackgroundMedia_MediaEnded"
+                      MediaFailed="MediaElement_MediaFailed"
+              MediaOpened="MediaElement_MediaOpened"
               Stretch="Fill"
               IsHitTestVisible="False"
-              Grid.ColumnSpan="1" Grid.RowSpan="5"/>
+              Grid.ColumnSpan="10" Grid.RowSpan="10"/>
 
         <Label x:Name="TitleLabel" Content="Catch the Egg" Margin="0 50 0 0" Grid.Row="0" HorizontalAlignment="Center" Style="{StaticResource TitleLabelStyle}" />
         
