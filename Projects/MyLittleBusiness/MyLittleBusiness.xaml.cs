@@ -496,7 +496,7 @@ namespace FinalProjectWPF.Projects.MyLittleBusiness
 
         private void RadioButton_ExitApp(object sender, RoutedEventArgs e)
         {
-            NavigationService.GoBack();
+            NavigationService.Navigate(new MyLittleBusinessPreviewPage());
         }
 
         private void Button_ClickNewProductLine(object sender, RoutedEventArgs e)

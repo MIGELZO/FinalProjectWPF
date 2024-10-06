@@ -26,42 +26,48 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
+                <Button Grid.Column="0" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15 10 0 0" Background="#f69669" Style="{StaticResource GridDownloadButton}" Click="GoBack_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="Assets\ExitIcon.png" Margin="0 0 5 0" Style="{StaticResource MenuButtonIcon}"/>
+                        <TextBlock Text="Exit App"/>
+                    </StackPanel>
+                </Button>
                 <StackPanel>
                     <!--years bar-->
                     <StackPanel x:Name="YearBar" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 50 0 30">
-                        <Button Style="{StaticResource RegularButton}">
+                        <Button x:Name="PreviousYearButton" Style="{StaticResource RegularButton}" Click="MoveToYear">
                             <Image Source="Assets\ArrowBackIcon.png" Height="25"/>
                         </Button>
 
-                        <RadioButton x:Name="MyYear1" Content="2022" Style="{StaticResource RadioButton}"/>
-                        <RadioButton x:Name="MyYear2" Content="2023" Style="{StaticResource RadioButton}"/>
-                        <RadioButton x:Name="MyYear3" Content="2024" Style="{StaticResource RadioButton}"/>
-                        <RadioButton x:Name="MyYear4" Content="2025" Style="{StaticResource RadioButton}"/>
-                        <RadioButton x:Name="MyYear5" Content="2026" Style="{StaticResource RadioButton}"/>
+                        <RadioButton x:Name="MyYear1" Content="2022" Style="{StaticResource RadioButton}" Checked="MoveToYear"/>
+                        <RadioButton x:Name="MyYear2" Content="2023" Style="{StaticResource RadioButton}" Checked="MoveToYear"/>
+                        <RadioButton x:Name="MyYear3" Content="2024" Style="{StaticResource RadioButton}" Checked="MoveToYear"/>
+                        <RadioButton x:Name="MyYear4" Content="2025" Style="{StaticResource RadioButton}" Checked="MoveToYear"/>
+                        <RadioButton x:Name="MyYear5" Content="2026" Style="{StaticResource RadioButton}" Checked="MoveToYear"/>
 
-                        <Button Style="{StaticResource RegularButton}">
+                        <Button x:Name="NextYearButton" Style="{StaticResource RegularButton}" Click="MoveToYear">
                             <Image Source="Assets\ArrowNextIcon.png" Height="25"/>
                         </Button>
                     </StackPanel>
 
                     <!--month bar-->
                     <StackPanel x:Name="MonthBar" Orientation="Horizontal" HorizontalAlignment="Center">
-                        <RadioButton x:Name="MyMonth1" Content="1" Style="{StaticResource ButtonMonth}"/>
-                        <RadioButton x:Name="MyMonth2" Content="2" Style="{StaticResource ButtonMonth}"/>
-                        <RadioButton x:Name="MyMonth3" Content="3" Style="{StaticResource ButtonMonth}"/>
-                        <RadioButton x:Name="MyMonth4" Content="4" Style="{StaticResource ButtonMonth}"/>
-                        <RadioButton x:Name="MyMonth5" Content="5" Style="{StaticResource ButtonMonth}"/>
-                        <RadioButton x:Name="MyMonth6" Content="6" Style="{StaticResource ButtonMonth}"/>
-                        <RadioButton x:Name="MyMonth7" Content="7" Style="{StaticResource ButtonMonth}"/>
-                        <RadioButton x:Name="MyMonth8" Content="8" Style="{StaticResource ButtonMonth}"/>
-                        <RadioButton x:Name="MyMonth9" Content="9" Style="{StaticResource ButtonMonth}"/>
-                        <RadioButton x:Name="MyMonth10" Content="10" Style="{StaticResource ButtonMonth}"/>
-                        <RadioButton x:Name="MyMonth11" Content="11" Style="{StaticResource ButtonMonth}"/>
-                        <RadioButton x:Name="MyMonth12" Content="12" Style="{StaticResource ButtonMonth}"/>
+                        <RadioButton x:Name="MyMonth1" Content="1" Style="{StaticResource ButtonMonth}" Checked="MoveToMonth"/>
+                        <RadioButton x:Name="MyMonth2" Content="2" Style="{StaticResource ButtonMonth}" Checked="MoveToMonth"/>
+                        <RadioButton x:Name="MyMonth3" Content="3" Style="{StaticResource ButtonMonth}" Checked="MoveToMonth"/>
+                        <RadioButton x:Name="MyMonth4" Content="4" Style="{StaticResource ButtonMonth}" Checked="MoveToMonth"/>
+                        <RadioButton x:Name="MyMonth5" Content="5" Style="{StaticResource ButtonMonth}" Checked="MoveToMonth"/>
+                        <RadioButton x:Name="MyMonth6" Content="6" Style="{StaticResource ButtonMonth}" Checked="MoveToMonth"/>
+                        <RadioButton x:Name="MyMonth7" Content="7" Style="{StaticResource ButtonMonth}" Checked="MoveToMonth"/>
+                        <RadioButton x:Name="MyMonth8" Content="8" Style="{StaticResource ButtonMonth}" Checked="MoveToMonth"/>
+                        <RadioButton x:Name="MyMonth9" Content="9" Style="{StaticResource ButtonMonth}" Checked="MoveToMonth"/>
+                        <RadioButton x:Name="MyMonth10" Content="10" Style="{StaticResource ButtonMonth}" Checked="MoveToMonth"/>
+                        <RadioButton x:Name="MyMonth11" Content="11" Style="{StaticResource ButtonMonth}" Checked="MoveToMonth"/>
+                        <RadioButton x:Name="MyMonth12" Content="12" Style="{StaticResource ButtonMonth}" Checked="MoveToMonth"/>
                     </StackPanel>
                     <Separator Height="0.8" Background="#cacaca" Margin="30 10"/>
-                    <TextBlock Text="October" Foreground="#f69669" FontSize="24" TextAlignment="Center" FontWeight="SemiBold" Margin="0 15 0 20"/>
-                    <Calendar x:Name="MainCalendar" CalendarItemStyle="{DynamicResource CalendarItemStyle}" CalendarDayButtonStyle="{DynamicResource CalendarDayButtonStyle}" Style="{DynamicResource CalendarStyle}"/>
+                    <TextBlock x:Name="SelectedMonthText" Text="October" Foreground="#f69669" FontSize="24" TextAlignment="Center" FontWeight="SemiBold" Margin="0 15 0 20"/>
+                    <Calendar x:Name="MainCalendar" SelectedDatesChanged="MainCalendar_SelectedDatesChanged" IsTodayHighlighted="False" CalendarItemStyle="{DynamicResource CalendarItemStyle}" CalendarDayButtonStyle="{DynamicResource CalendarDayButtonStyle}" Style="{DynamicResource CalendarStyle}"/>
                 </StackPanel>
 
                 <!--right side-->
@@ -74,30 +80,30 @@
                     <!--date header-->
                     <Grid Grid.Row="0">
                         <StackPanel Margin="30 45 30 10" Orientation="Horizontal">
-                            <TextBlock Text="04" FontSize="50" Foreground="#ffffff"/>
+                            <TextBlock x:Name="SelectedDayNumber" Text="04" FontSize="50" Foreground="#ffffff"/>
 
                             <StackPanel Margin="10 0 0 0" VerticalAlignment="Center">
-                                <TextBlock Text="October" Foreground="#ffffff" FontSize="24"/>
-                                <TextBlock Text="Friday" Foreground="#FBC9B1" FontSize="14"/>
+                                <TextBlock x:Name="SelectedMonthSide" Text="October" Foreground="#ffffff" FontSize="24"/>
+                                <TextBlock x:Name="SelectedDayText" Text="Friday" Foreground="#FBC9B1" FontSize="14"/>
                             </StackPanel>
                             <StackPanel Margin="70 0 0 0">
                                 <StackPanel Orientation="Horizontal">
-                                    <Button x:Name="next" Margin="25 0 0 0" Style="{StaticResource RegularButton}">
+                                    <Button x:Name="next" Margin="25 0 0 0" Style="{StaticResource RegularButton}" Click="PrevDayButton_Click">
                                         <Image Source="Assets\ArrowBackIcon.png" Height="25"/>
                                     </Button>
 
-                                    <Button x:Name="prev" Style="{StaticResource RegularButton}">
+                                    <Button x:Name="prev" Style="{StaticResource RegularButton}" Click="NextDayButton_Click">
                                         <Image Source="Assets\ArrowNextIcon.png" Height="25"/>
                                     </Button>
                                 </StackPanel>
-                                <Button Content="Back To Today" HorizontalAlignment="Right" VerticalAlignment="Center" Background="#99DAF9" Width="100" Style="{StaticResource CalenderWideButton}"/>
+                                <Button Content="Back To Today" HorizontalAlignment="Right" VerticalAlignment="Center" Background="#99DAF9" Width="100" Style="{StaticResource CalenderWideButton}" Click="BackToToday_Click"/>
                             </StackPanel>
                         </StackPanel>
                     </Grid>
 
                     <!--task section-->
                     <Grid Grid.Row="1">
-                        <TextBlock Text="5 Tasks - 2 Dates left" Foreground="#FBC9B1" FontSize="16" Margin="35 0 20 0"/>
+                        <TextBlock x:Name="TeskCount" Text="5 Tasks" Foreground="#FBC9B1" FontSize="16" Margin="35 0 20 0"/>
 
                         <Border Background="#FBC9B1" CornerRadius="10" HorizontalAlignment="Center" Width="355" Margin="0 30 0 20" Padding="17 15 5 15">
                             <Grid>
@@ -130,7 +136,7 @@
 
                                 </StackPanel>
 
-                                <Button Grid.Column="1" Style="{StaticResource RegularButton}">
+                                <Button Grid.Column="1" Style="{StaticResource RegularButton}" Click="CreateTaskButton_Click">
                                     <Image x:Name="Pluse" Source="Assets\AddTaskIcon.png" Width="28" Height="28"/>
                                 </Button>
                             </Grid>
@@ -138,13 +144,13 @@
                     </Grid>
 
                     <!--Notes-->
-                    <StackPanel x:Name="TaskTable" Grid.Row="2">
-
-                    </StackPanel>
-                    <Popup x:Name="TaskPopup" 
-                        StaysOpen="False" 
-                        IsOpen="False" PlacementTarget="{Binding ElementName=MainWindow}" 
-                        Placement="Left" HorizontalAlignment="Center" VerticalAlignment="Center" AllowsTransparency="True">
+                    <ScrollViewer VerticalScrollBarVisibility="Hidden" MaxHeight="250" Grid.Row="2">
+                        <StackPanel x:Name="TaskTable">
+                            
+                        </StackPanel>
+                    </ScrollViewer>
+                    
+                    <Popup x:Name="TaskPopup" StaysOpen="False" IsOpen="False" PlacementTarget="{Binding ElementName=MainWindow}" Placement="Left" HorizontalAlignment="Center" VerticalAlignment="Center" AllowsTransparency="True">
                         <Border Background="White" BorderBrush="Gray" BorderThickness="2" Padding="20" CornerRadius="10">
                             <StackPanel>
                                 <TextBlock Text="Task Details" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
@@ -235,10 +241,10 @@
 
                                 <!-- Submit Button -->
                                 <StackPanel Orientation="Horizontal">
-                                    <Button Content="Submit" Width="100" Margin="0,10,0,0" Style="{StaticResource CalenderWideButton}"/>
+                                    <Button Content="Submit" Width="100" Margin="0,10,0,0" Style="{StaticResource CalenderWideButton}" Click="SubmitTask_Click"/>
                                     <!--Click="SubmitButton_Click"-->
                                     <Separator Margin="3" Background="black" BorderThickness="1" />
-                                    <Button Content="Delete" Width="100" Margin="0,10,0,0"   Style="{StaticResource CalenderWideButton}"/>
+                                    <Button Content="Delete" Width="100" Margin="0,10,0,0"   Style="{StaticResource CalenderWideButton}" Click="DeleteTask_Click"/>
                                     <!--Click="DeleteButton_Click"-->
                                 </StackPanel>
 

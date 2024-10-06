@@ -20,7 +20,7 @@ namespace FinalProjectWPF.Projects.TicTacToe
         }
         private void GoBack_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.GoBack();
+            NavigationService.Navigate(new GameCenterHomePage());
         }
 
         private void OpenApp_Click(object sender, RoutedEventArgs e)

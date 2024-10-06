@@ -11,7 +11,7 @@
     </Style>
 
     <!--TextBlockLabelStyle-->
-    <Style x:Key="TextBlockTiltleStyle" TargetType="TextBlock">
+    <Style x:Key="TextBlockTitleStyle" TargetType="TextBlock">
         <Setter Property="FontSize" Value="40"/>
         <Setter Property="FontWeight" Value="Bold"/>
         <Setter Property="FontFamily" Value="Calibri"/>
