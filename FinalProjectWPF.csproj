@@ -21,6 +21,7 @@
     <None Remove="Assets\dotnet.png" />
     <None Remove="Assets\DropTheMillionIcon.png" />
     <None Remove="Assets\editIcon.png" />
+    <None Remove="Assets\ExitIcon.png" />
     <None Remove="Assets\GameCenterBackground.mp4" />
     <None Remove="Assets\InfoIcon.png" />
     <None Remove="Assets\LittleBusinessIcon2.png" />
@@ -35,6 +36,7 @@
     <None Remove="Assets\TicTacToeIcon.png" />
     <None Remove="Assets\wpf.png" />
     <None Remove="Projects\CatchTheEgg\Accets\Background.jpg" />
+    <None Remove="Projects\CatchTheEgg\Accets\Background1.jpg" />
     <None Remove="Projects\CatchTheEgg\Accets\Basket.png" />
     <None Remove="Projects\CatchTheEgg\Accets\BrokenEgg.png" />
     <None Remove="Projects\CatchTheEgg\Accets\Egg.png" />
@@ -52,8 +54,12 @@
     <None Remove="Projects\CatchTheEgg\Accets\Poop.png" />
     <None Remove="Projects\CatchTheEgg\Accets\TempCTEbackground.mp4" />
     <None Remove="Projects\DontDropTheMillion\Assets\Background.jpg" />
+    <None Remove="Projects\DontDropTheMillion\Assets\CorrectIcon.png" />
+    <None Remove="Projects\DontDropTheMillion\Assets\Decrease.png" />
     <None Remove="Projects\DontDropTheMillion\Assets\ExitIcon.png" />
+    <None Remove="Projects\DontDropTheMillion\Assets\Increase.png" />
     <None Remove="Projects\DontDropTheMillion\Assets\QuestionBlock.png" />
+    <None Remove="Projects\DontDropTheMillion\Assets\WrongIcon.png" />
     <None Remove="Projects\MyCalender\Assets\AddTaskIcon.png" />
     <None Remove="Projects\MyCalender\Assets\ArrowBackIcon.png" />
     <None Remove="Projects\MyCalender\Assets\ArrowNextIcon.png" />
@@ -114,7 +120,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\ExitIcon.png" />
     <Resource Include="Projects\CatchTheEgg\Accets\ExitIcon.png" />
+    <Resource Include="Projects\DontDropTheMillion\Assets\CorrectIcon.png" />
+    <Resource Include="Projects\DontDropTheMillion\Assets\Decrease.png" />
+    <Resource Include="Projects\DontDropTheMillion\Assets\Increase.png" />
     <Resource Include="Projects\DontDropTheMillion\Assets\QuestionBlock.png" />
   </ItemGroup>
 
@@ -158,6 +168,7 @@
     <Resource Include="Projects\CatchTheEgg\Accets\Poop.png" />
     <Resource Include="Projects\DontDropTheMillion\Assets\Background.jpg" />
     <Resource Include="Projects\DontDropTheMillion\Assets\ExitIcon.png" />
+    <Resource Include="Projects\DontDropTheMillion\Assets\WrongIcon.png" />
     <Resource Include="Projects\MyCalender\Assets\AddTaskIcon.png" />
     <Resource Include="Projects\MyCalender\Assets\ArrowBackIcon.png" />
     <Resource Include="Projects\MyCalender\Assets\ArrowNextIcon.png" />
