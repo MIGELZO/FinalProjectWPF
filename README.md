@@ -9,8 +9,7 @@ A collection of six mini-projects developed in WPF using C#. Each game and appli
 - [Technologies Used](#technologies-used)
 - [Installation](#installation)
 - [Usage](#usage)
-- [License](#license)
-- [Contributing](#contributing)
+
 
 ## Games and Applications
 
@@ -55,3 +54,24 @@ The project includes a robust file manager and user manager, allowing the tracki
    ```bash
    git clone https://github.com/yourusername/yourrepository.git
    ```
+
+   ## Usage
+
+- Business Management
+  First you need to set binding terminal details (API keys) on the top right side of the app under Settings button.
+  Please be sure to refresh the screen after saving the keys because on some computers the secret key is not automatically pulled due to computer permissions etc.
+
+  The details of the API keys are:
+  Terminal number - 1001
+  Username - kzFKfohEvL6AOF8aMEJz
+  Password - FIDHIh4pAadw3Slbdsjg
+
+  It is very important not to use a real credit card because this terminal is a test terminal only!!
+  To make a credit transaction you must use a dummy card.
+  Dummy credit card details:
+  Card number - 4580000000000000
+  Expiry date - a future date of your choice
+  ID number - 9 random digits of your choice
+
+  Do not make a credit charge in an amount exceeding NIS 4999
+  
