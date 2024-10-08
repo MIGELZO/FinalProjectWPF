@@ -57,9 +57,11 @@ The project includes a robust file manager and user manager, allowing the tracki
 
    ## Usage
 
-1. Business Management
+1. Business Management ("My little business")
   - First you need to set binding terminal details (API keys) on the top right side of the app under Settings button.
-  Please be sure to refresh the screen after saving the keys because on some computers the secret key is not automatically pulled due to computer permissions etc.
+  Please be sure to refresh the screen after saving the keys By exiting and returning to the "My little business" application.
+
+      That because on some computers the secret key is not automatically pulled due to computer permissions etc.
 
  The details of the API keys are:
  - Terminal number - 1001
